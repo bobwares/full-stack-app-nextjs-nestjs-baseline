@@ -18,7 +18,7 @@ project_root/
 
 ### Versioning
 
-- create file version.md with updated version number and list of changes. Include date and time of change and branch name.
+- create file project_root/version.md with updated version number and list of changes. Include date and time of change and branch name.
 - Start version at 0.0.1
 - Update version each time the code is updated.
 - Update only code or configuration files that have changed.
