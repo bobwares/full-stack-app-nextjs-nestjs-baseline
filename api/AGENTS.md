@@ -1,9 +1,8 @@
-# Context
+# Backend Application Context
 
 ## Overview
 
 This is a backend application that exposes a REST API and connects to an ORM.
-
 
 ## Technology Stack
 
@@ -17,7 +16,7 @@ This is a backend application that exposes a REST API and connects to an ORM.
 
 ### Frameworks
 
-- NextJS: https://nestjs.com/
+- NestJS: https://nestjs.com/
 
 
 ### Libraries
@@ -25,3 +24,9 @@ This is a backend application that exposes a REST API and connects to an ORM.
 Look at the package.json for libraries used.
 
 
+### Coding Style and Conventions
+
+- all source code is contained under src directory.
+- Test Driven Development
+- Use latest features
+- Document application in project_root/api/README.md
