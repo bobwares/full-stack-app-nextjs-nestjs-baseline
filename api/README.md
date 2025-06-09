@@ -86,6 +86,28 @@ npm run prisma migrate deploy
 
 Adjust commands based on your chosen ORM.
 
+## Customers API
+
+| Method | Endpoint           | Description               |
+| ------ | ------------------ | ------------------------- |
+| GET    | `/customers`       | List all customers        |
+| GET    | `/customers/:id`   | Retrieve one customer     |
+| POST   | `/customers`       | Create a customer         |
+| PUT    | `/customers/:id`   | Update a customer         |
+| DELETE | `/customers/:id`   | Remove a customer         |
+
+## Database Setup
+
+Spin up PostgreSQL and run migrations:
+
+```bash
+cd ../db
+cp .env.example .env
+docker compose up -d
+cd ../api
+npm run typeorm migration:run
+```
+
 ## Directory Structure
 
 ```

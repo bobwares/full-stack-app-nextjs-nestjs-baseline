@@ -131,11 +131,13 @@ The Next.js dev server runs on [http://localhost:3000](http://localhost:3000) an
 
 A basic REST API is exposed under `/api`:
 
-* **GET** `/profile` – List all profiles
-* **POST** `/profile` – Create a new profile
-* **GET** `/profile/:id` – Retrieve a single profile
-* **PUT** `/profile/:id` – Update a profile
-* **DELETE** `/profile/:id` – Remove a profile
+### Customers
+
+* **GET** `/customers` – List all customers
+* **POST** `/customers` – Create a new customer
+* **GET** `/customers/:id` – Retrieve a single customer
+* **PUT** `/customers/:id` – Update a customer
+* **DELETE** `/customers/:id` – Remove a customer
 
 If Swagger is enabled, visit `http://localhost:3001/api` to explore the API documentation.
 
