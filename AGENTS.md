@@ -148,3 +148,4 @@ Copy this template into the PR description. The AI agent must fill every section
 Adhering to these conventions ensures the coding agent produces consistent, readable history and automates releases, changelogs, and traceability with minimal friction.
 
 End of Document
+
