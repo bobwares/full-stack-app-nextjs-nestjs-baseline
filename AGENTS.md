@@ -18,7 +18,7 @@ project_root/
 
 ### Versioning
 
-- create file version.md with updated version number and list of changes. Include date and time of change and branch name.
+- create file project_root/version.md with updated version number and list of changes. Include date and time of change and branch name.
 - Start version at 0.0.1
 - Update version each time the code is updated.
 - Update only code or configuration files that have changed.
@@ -148,3 +148,4 @@ Copy this template into the PR description. The AI agent must fill every section
 Adhering to these conventions ensures the coding agent produces consistent, readable history and automates releases, changelogs, and traceability with minimal friction.
 
 End of Document
+
