@@ -139,6 +139,7 @@ Copy this template into the PR description. The AI agent must fill every section
 
 # Checklist
 - [ ] Unit tests pass (`npm test` / `pytest`)
+* If the changes are limited to `/db/`, skip `npm test` and run database checks only (e.g., `make db-test`).
 - [ ] Integration tests pass
 - [ ] Linter passes (`eslint` / `ruff`)
 - [ ] Documentation updated (`README.md`, API docs)
