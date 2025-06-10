@@ -10,3 +10,19 @@ Content-Type: application/json
 
 ### List customers
 GET http://localhost:3001/customers
+
+### Retrieve customer
+GET http://localhost:3001/customers/1
+
+### Update customer
+PUT http://localhost:3001/customers/1
+Content-Type: application/json
+
+{
+  "fullName": {"firstName": "Alice", "lastName": "Johnson"},
+  "emails": ["alice.j@example.com"],
+  "privacySettings": {"marketingEmailsEnabled": false, "twoFactorEnabled": true}
+}
+
+### Delete customer
+DELETE http://localhost:3001/customers/1
