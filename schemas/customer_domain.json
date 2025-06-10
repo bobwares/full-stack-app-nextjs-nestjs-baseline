@@ -8,9 +8,20 @@
       "format": "uuid",
       "description": "Unique identifier for the customer profile"
     },
-    "fullName": {
-      "$ref": "#/definitions/FullName"
+    "firstName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Customer’s given name"
     },
+    "middleName": {
+      "type": "string",
+      "description": "Customer’s middle name or initial",
+      "minLength": 1
+    },
+    "lastName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Customer’s family name",
     "emails": {
       "type": "array",
       "description": "List of the customer’s email addresses",
@@ -38,34 +49,14 @@
   },
   "required": [
     "id",
-    "fullName",
+    "firstName",
+    "lastName",
     "emails",
     "privacySettings"
   ],
   "additionalProperties": false,
   "definitions": {
-    "FullName": {
-      "type": "object",
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "minLength": 1,
-          "description": "Customer’s given name"
-        },
-        "middleName": {
-          "type": "string",
-          "description": "Customer’s middle name or initial",
-          "minLength": 1
-        },
-        "lastName": {
-          "type": "string",
-          "minLength": 1,
-          "description": "Customer’s family name"
-        }
-      },
-      "required": ["firstName", "lastName"],
-      "additionalProperties": false
-    },
+
     "PhoneNumber": {
       "type": "object",
       "properties": {

@@ -51,7 +51,7 @@ This repository is a full-stack application baseline with:
   # App: {{Application Name}}
   # Package: {{package}}
   # File: {{file name}}
-  # Version: 2.0.29
+  # Version: 0.1.0
   # Author: {{author}}
   # Date: {{current date/ time}}
   # Description: document the function of the code.
@@ -138,9 +138,9 @@ Copy this template into the PR description. The AI agent must fill every section
 - T1300 Validation Rules
 
 # Checklist
-- [ ] Unit tests pass (`npm test` / `pytest`)
 - [ ] Integration tests pass
-- [ ] Linter passes (`eslint` / `ruff`)
+* If the changes are limited to `/db/`, skip `npm test` and run database checks only (e.g., `make db-test`).
+- [ ] Linter passes (`eslint`)
 - [ ] Documentation updated (`README.md`, API docs)
 
 # Screenshots / Demo (if UI)

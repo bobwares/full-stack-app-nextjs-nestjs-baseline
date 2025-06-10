@@ -40,7 +40,24 @@ Key components include:
 - migrations/: Forward-only migration scripts (e.g., 20250610120000_add_table.sql).
 - scripts/schema/: Ordered DDL scripts (e.g., 01_create_customers.sql).
 - scripts/seed/: Idempotent seed scripts (e.g., 01_seed_customers.sql).
+-  Schema creation statements belong in `scripts/schema/NN_<description>.sql`.
+-  Data inserts belong in `scripts/seed/NN_<description>.sql`.
+-  Do **not** mix table creation and seed data in the same file.
 
+Example:
+
+```sql
+-- scripts/schema/01_create_customer.sql
+CREATE TABLE IF NOT EXISTS customer (
+    customer_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+-- scripts/seed/01_seed_customer.sql
+INSERT INTO customer (name)
+VALUES ('Alice'), ('Bob')
+ON CONFLICT DO NOTHING;
+```
 
 **Metadata Headers**
 
@@ -49,7 +66,7 @@ Every SQL and Bash script must include a metadata header.
 Format:-- App: <project-name>
 -- Package: db
 -- File: <filename>
--- Version: 2.0.29
+-- Version: 0.1.0
 -- Author: AI Agent
 -- Date: <YYYY-MM-DD>
 -- Description: <Brief purpose of the script>
@@ -230,7 +247,7 @@ JSON Schema:
 -- App: <project-name>
 -- Package: db
 -- File: 20250610120000_create_order_tables.sql
--- Version: 2.0.29
+-- Version: 0.1.0
 -- Author: AI Agent
 -- Date: 2025-06-10
 -- Description: Creates normalized tables for the order domain from JSON schema
@@ -351,7 +368,7 @@ Create a migration in `db/migrations/20250610130000_add_archived_to_customer_pre
 -- App: <project-name>
 -- Package: db
 -- File: 20250610130000_add_archived_to_customer_preference.sql
--- Version: 2.0.29
+-- Version: 0.1.0
 -- Author: AI Agent
 -- Date: 2025-06-10
 -- Description: Adds archived BOOLEAN column to customer_preference table
@@ -403,7 +420,7 @@ Create a seed script in `db/scripts/seed/01_seed_customers.sql` that:
 -- App: <project-name>
 -- Package: db
 -- File: 01_seed_customers.sql
--- Version: 2.0.29
+-- Version: 0.1.0
 -- Author: AI Agent
 -- Date: 2025-06-10
 -- Description: Seeds initial customer data for development
