@@ -124,3 +124,21 @@ project_root/api/
 ## License
 
 This project is licensed under the MIT License. See `LICENSE` for details.
+
+## Customers API
+
+The Customers API provides CRUD operations for customer records.
+
+| Method | Endpoint | Description |
+| ------ | -------- | ----------- |
+| GET | `/customers` | List all customers |
+| GET | `/customers/:id` | Retrieve a customer by ID |
+| POST | `/customers` | Create a new customer |
+| PUT | `/customers/:id` | Update an existing customer |
+| DELETE | `/customers/:id` | Remove a customer |
+
+### Database Setup
+
+1. `cd project_root/db && docker-compose up -d` to start PostgreSQL.
+2. `npm run typeorm:migration:run` to apply migrations.
+3. `npm run start:dev` to run the server.
