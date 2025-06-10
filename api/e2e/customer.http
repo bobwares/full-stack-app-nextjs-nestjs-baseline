@@ -1,0 +1,40 @@
+###
+@host = http://localhost:3001
+@customerId = 1
+
+# Create a new Customer
+POST {{host}}/customers
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Smith",
+  "email": "alice.smith@example.com",
+  "phoneNumbers": ["+1234567890"],
+  "addresses": ["123 Main St, Anytown, USA"]
+}
+
+###
+# Retrieve all Customers
+GET {{host}}/customers
+
+###
+# Retrieve a single Customer by ID
+GET {{host}}/customer/{{customerId}}
+
+###
+# Update an existing Customer
+PUT {{host}}/customer/{{customerId}}
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Johnson",
+  "email": "alice.johnson@example.com",
+  "phoneNumbers": ["+0987654321"],
+  "addresses": ["456 Elm St, Othertown, USA"]
+}
+
+###
+# Delete a Customer
+DELETE {{host}}/customer/{{customerId}}

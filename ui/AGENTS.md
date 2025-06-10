@@ -53,18 +53,20 @@ Refer to `project_root/ui/package.json` for exact dependency versions.
    # App: {{Application Name}}
    # Package: {{package}}
    # File: {{file name}}
-   # Version: 2.0.29
+   # Version: sematic versioning starting at 0.1.0
    # Author: {{author}}
-   # Date: {{current date/ time}}
-   # Description: document the function of the code.
+   # Date: {Timestamp when the change was made}
+   # Description:  level 5 documentation of the class or function.  Document each method or function in the file.  
    #
    ```
 
 3. **Test-Driven Development (TDD)**
 
-   * Write tests before implementation.
+   * Write unit tests before implementation.
+   * Name test files `<module>.test.ts`.
+   * Place unit tests in the same directory as the source code being tested
    * Maintain a minimum 80% coverage.
-   * Name test files `<module>.test.ts` or `<module>.spec.ts`.
+   * npm run test
 
 4. **Modern Language Features**
 
@@ -75,7 +77,6 @@ Refer to `project_root/ui/package.json` for exact dependency versions.
 5. **Documentation**
 
    * Maintain `project_root/ui/README.md` with:
-
       * Overview and purpose
       * Setup and build instructions
       * Usage examples and API reference

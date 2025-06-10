@@ -34,8 +34,8 @@ This is a NestJS + TypeScript REST API that connects to an ORM layer. Its respon
 **Testing**
 
 * Jest
+* .http files
 
-Refer to `project_root/api/package.json` for exact dependency versions.
 
 ## 4. Coding Style & Conventions
 
@@ -53,18 +53,23 @@ Refer to `project_root/api/package.json` for exact dependency versions.
    # App: {{Application Name}}
    # Package: {{package}}
    # File: {{file name}}
-   # Version: 2.0.29
+   # Version: sematic versioning starting at 0.1.0
    # Author: {{author}}
-   # Date: {{current date/ time}}
-   # Description: document the function of the code.
+   # Date: {Timestamp when the change was made}
+   # Description:  level 5 documentation of the class or function.  Document each method or function in the file.  
    #
    ```
 
 3. **Test-Driven Development (TDD)**
 
-    * Write tests before implementing new functionality.
-    * Maintain a minimum of 80% code coverage.
-    * Name test files `<module>.spec.ts` or `<module>.test.ts`.
+   * Write unit tests before implementation.
+   * Name test files `<module>.test.ts`.
+   * Place unit tests in the same directory as the source code being tested
+   * Maintain a minimum 80% coverage.
+   * npm run test
+   * When creating new REST endpoints, create .http test for the resource.
+
+
 
 4. **Use of Modern Language & Framework Features**
 
@@ -86,7 +91,7 @@ Refer to `project_root/api/package.json` for exact dependency versions.
 
 1. **Multi-Environment Support**
 
-    * Environments: `local`, `development`, `staging`, `production`
+    * Environments: `local`, `dev`, `stage`, `prod`
     * Active environment specified via `APP_ENV` or `NODE_ENV`.
 
 2. **Externalized & Validated Configuration**
