@@ -136,6 +136,11 @@ A basic REST API is exposed under `/api`:
 * **GET** `/profile/:id` – Retrieve a single profile
 * **PUT** `/profile/:id` – Update a profile
 * **DELETE** `/profile/:id` – Remove a profile
+* **GET** `/customers` – List customers
+* **POST** `/customers` – Create a customer
+* **GET** `/customers/:id` – Get a customer
+* **PUT** `/customers/:id` – Update a customer
+* **DELETE** `/customers/:id` – Delete a customer
 
 If Swagger is enabled, visit `http://localhost:3001/api` to explore the API documentation.
 
