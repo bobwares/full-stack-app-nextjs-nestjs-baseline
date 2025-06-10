@@ -46,14 +46,17 @@ Key components include:
 
 Example:
 
+File: project_root/db/scripts/schema/01_create_customer.sql
 ```sql
--- scripts/schema/01_create_customer.sql
 CREATE TABLE IF NOT EXISTS customer (
     customer_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL
 );
+```
 
--- scripts/seed/01_seed_customer.sql
+File: project_root/db/scripts/seed/01_seed_customer.sql
+
+```sql
 INSERT INTO customer (name)
 VALUES ('Alice'), ('Bob')
 ON CONFLICT DO NOTHING;
