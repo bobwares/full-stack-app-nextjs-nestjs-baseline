@@ -59,6 +59,18 @@ npm run build
 npm run start:prod
 ```
 
+## Logging
+
+The application uses NestJS `Logger` to record CRUD operations. Set the log
+level via the `LOG_LEVEL` environment variable. Logs are emitted in JSON
+format to standard output.
+
+## Error Handling
+
+Requests for non-existent customers return a `404 Not Found` response. Other
+database errors are caught by a global `DatabaseExceptionFilter` and return a
+`500` status with `{ "message": "Database error" }`.
+
 ## Testing
 
 Run unit and integration tests:
