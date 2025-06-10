@@ -40,25 +40,28 @@ Key components include:
 - migrations/: Forward-only migration scripts (e.g., 20250610120000_add_table.sql).
 - scripts/schema/: Ordered DDL scripts (e.g., 01_create_customers.sql).
 - scripts/seed/: Idempotent seed scripts (e.g., 01_seed_customers.sql).
--  Schema creation statements belong in `scripts/schema/NN_<description>.sql`.
--  Data inserts belong in `scripts/seed/NN_<description>.sql`.
--  Do **not** mix table creation and seed data in the same file.
+- Schema creation statements belong in `scripts/schema/NN_<description>.sql`.
+- Data inserts belong in `scripts/seed/NN_<description>.sql`.
+- Do **not** mix table creation and seed data in the same file.
 
 Example:
 
+File: project_root/db/scripts/schema/01_create_customer.sql
+
 ```sql
--- scripts/schema/01_create_customer.sql
 CREATE TABLE IF NOT EXISTS customer (
     customer_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL
 );
+```
 
--- scripts/seed/01_seed_customer.sql
+File: project_root/db/scripts/seed/01_seed_customer.sql
+
+```sql
 INSERT INTO customer (name)
 VALUES ('Alice'), ('Bob')
 ON CONFLICT DO NOTHING;
 ```
-
 **Metadata Headers**
 
 Every SQL and Bash script must include a metadata header.
