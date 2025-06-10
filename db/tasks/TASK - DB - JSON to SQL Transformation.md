@@ -5,60 +5,226 @@ Env: { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, DATABASE_URL }
 Project: `<project-name>`  
 Directory: `/db`
 
+**Constraints**:
+- File path: db/migrations/20250610120000_create_order_tables.sql
+- Use PostgreSQL v16 dialect
+- Normalize to at least 3NF
+- Use singular table names (e.g., customer, order_item)
+- Include indexes for foreign keys and queryable fields
+- Use CREATE TABLE IF NOT EXISTS
+- Follow project naming conventions
+
+
+**Output**:  
+A complete SQL file with metadata header, table definitions, indexes, sample data inserts, and smoke tests.
+
 **Task**:  
-Generate a migration in `db/migrations/20250610120000_create_order_tables.sql` that:
+Generate a migration in `db/migrations/NN_<schema title>_tables.sql` that:
 - Creates normalized tables from the JSON schema below
 - Infers data types and constraints (PRIMARY KEY, FOREIGN KEY, UNIQUE)
-- Maps nested objects (`customer`, `shipping_address`) to separate tables
+- Maps nested objects ie (`customer`, `shipping_address`) to separate tables
 - Converts arrays (`items`) to a related table
 - Includes a metadata header and smoke tests
-- Adds sample INSERT statements
+
+Example: 
 
 **JSON Schema**:
 ```json
 {
-  "order": {
-    "id": "12345",
-    "customer": {
-      "id": "C789",
-      "name": "John Doe",
-      "email": "john@example.com"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CustomerProfile",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the customer profile"
     },
-    "items": [
-      {
-        "product_id": "P1",
-        "name": "Laptop",
-        "price": 999.99,
-        "quantity": 1
+    "firstName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Customer’s given name"
+    },
+    "middleName": {
+      "type": "string",
+      "description": "Customer’s middle name or initial",
+      "minLength": 1
+    },
+    "lastName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Customer’s family name"
+    },
+    "emails": {
+      "type": "array",
+      "description": "List of the customer’s email addresses",
+      "items": {
+        "type": "string",
+        "format": "email"
       },
-      {
-        "product_id": "P2",
-        "name": "Mouse",
-        "price": 24.99,
-        "quantity": 2
-      }
-    ],
-    "shipping_address": {
-      "street": "123 Main St",
-      "city": "Boston",
-      "state": "MA",
-      "zip": "02108"
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "phoneNumbers": {
+      "type": "array",
+      "description": "List of the customer’s phone numbers",
+      "items": {
+        "$ref": "#/definitions/PhoneNumber"
+      },
+      "minItems": 1
+    },
+    "address": {
+      "$ref": "#/definitions/PostalAddress"
+    },
+    "privacySettings": {
+      "$ref": "#/definitions/PrivacySettings"
+    }
+  },
+  "required": [
+    "id",
+    "firstName",
+    "lastName",
+    "emails",
+    "privacySettings"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+
+    "PhoneNumber": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of phone number",
+          "enum": ["mobile", "home", "work", "other"]
+        },
+        "number": {
+          "type": "string",
+          "pattern": "^\\+?[1-9]\\d{1,14}$",
+          "description": "Phone number in E.164 format"
+        }
+      },
+      "required": ["type", "number"],
+      "additionalProperties": false
+    },
+    "PostalAddress": {
+      "type": "object",
+      "properties": {
+        "line1": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Street address, P.O. box, company name, c/o"
+        },
+        "line2": {
+          "type": "string",
+          "description": "Apartment, suite, unit, building, floor, etc."
+        },
+        "city": {
+          "type": "string",
+          "minLength": 1,
+          "description": "City or locality"
+        },
+        "state": {
+          "type": "string",
+          "minLength": 1,
+          "description": "State, province, or region"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "ZIP or postal code"
+        },
+        "country": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2,
+          "description": "ISO 3166-1 alpha-2 country code"
+        }
+      },
+      "required": ["line1", "city", "state", "postalCode", "country"],
+      "additionalProperties": false
+    },
+    "PrivacySettings": {
+      "type": "object",
+      "properties": {
+        "marketingEmailsEnabled": {
+          "type": "boolean",
+          "description": "Whether the user opts in to marketing emails"
+        },
+        "twoFactorEnabled": {
+          "type": "boolean",
+          "description": "Whether two-factor authentication is enabled"
+        }
+      },
+      "required": [
+        "marketingEmailsEnabled",
+        "twoFactorEnabled"
+      ],
+      "additionalProperties": false
     }
   }
 }
 ````
 
+**Expected Output**:
 
-**Constraints**:
-- File path: db/migrations/20250610120000_create_order_tables.sql  
-- Use PostgreSQL v16 dialect  
-- Normalize to at least 3NF  
-- Use singular table names (e.g., customer, order_item)  
-- Include indexes for foreign keys and queryable fields  
-- Use CREATE TABLE IF NOT EXISTS  
-- Follow project naming conventions  
-- Include sample INSERT statements for testing  
+```sql
+-- App: Initial Full-Stack Application
+-- Package: db
+-- File: 20250610120000_create_customer_tables.sql
+-- Version: 0.1.0
+-- Author: AI Agent
+-- Date: 2025-06-10
+-- Description: Creates normalized tables for the customer domain.
 
-**Output**:  
-A complete SQL file with metadata header, table definitions, indexes, sample data inserts, and smoke tests.
+BEGIN;
+
+CREATE TABLE IF NOT EXISTS postal_address (
+                                              address_id SERIAL PRIMARY KEY,
+                                              line1 VARCHAR(255) NOT NULL,
+                                              line2 VARCHAR(255),
+                                              city VARCHAR(100) NOT NULL,
+                                              state VARCHAR(50) NOT NULL,
+                                              postal_code VARCHAR(20),
+                                              country CHAR(2) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS privacy_settings (
+                                                privacy_settings_id SERIAL PRIMARY KEY,
+                                                marketing_emails_enabled BOOLEAN NOT NULL,
+                                                two_factor_enabled BOOLEAN NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS customer (
+                                        customer_id UUID PRIMARY KEY,
+                                        first_name VARCHAR(255) NOT NULL,
+                                        middle_name VARCHAR(255),
+                                        last_name VARCHAR(255) NOT NULL,
+                                        address_id INT REFERENCES postal_address(address_id),
+                                        privacy_settings_id INT REFERENCES privacy_settings(privacy_settings_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_customer_address_id ON customer (address_id);
+CREATE INDEX IF NOT EXISTS idx_customer_privacy_settings_id ON customer (privacy_settings_id);
+
+CREATE TABLE IF NOT EXISTS customer_email (
+                                              email_id SERIAL PRIMARY KEY,
+                                              customer_id UUID NOT NULL REFERENCES customer(customer_id) ON DELETE CASCADE,
+                                              email VARCHAR(255) NOT NULL,
+                                              UNIQUE (customer_id, email)
+);
+
+CREATE INDEX IF NOT EXISTS idx_customer_email_customer_id ON customer_email (customer_id);
+
+CREATE TABLE IF NOT EXISTS customer_phone_number (
+                                                     phone_id SERIAL PRIMARY KEY,
+                                                     customer_id UUID NOT NULL REFERENCES customer(customer_id) ON DELETE CASCADE,
+                                                     type VARCHAR(20) NOT NULL,
+                                                     number VARCHAR(15) NOT NULL,
+                                                     UNIQUE (customer_id, number)
+);
+
+CREATE INDEX IF NOT EXISTS idx_customer_phone_customer_id ON customer_phone_number (customer_id);
+```
+
+
 
