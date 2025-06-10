@@ -36,7 +36,12 @@ Based on the `customer_domain` JSON schema (`project_root/schemas/customer_domai
     - `customer.service.ts`
     - `dtos/create-customer.dto.ts`
     - `dtos/update-customer.dto.ts`
+    - `customer.controller.test.ts`
+    - `customer.service.test.ts`
+    - `dtos/create-customer.dto.test.ts`
+    - `dtos/update-customer.dto.test.ts`
     - (if needed) `customer.module.ts` updates
-- New end-to-end test at `apps/api/test/customers.e2e-spec.ts`
+- New end-to-end test at `project_root/api/test/customers.e2e-spec.ts`
+- New .http test at `project_root/api/e2e/customers.http`
 - Documentation update in `project_root/api/README.md`  
 - Documentation update in `project_rootREADME.md`  

@@ -34,15 +34,15 @@ This is a NestJS + TypeScript REST API that connects to an ORM layer. Its respon
 **Testing**
 
 * Jest
+* .http files
 
-Refer to `project_root/api/package.json` for exact dependency versions.
 
 ## 4. Coding Style & Conventions
 
 1. **Directory Layout**
 
-    * All production code resides under `src/`.
-    * Tests mirror the source structure under `src/` (unit tests) or in `__tests__/` (integration/e2e).
+   * All production code resides under `src/`.
+   * Tests mirror the source structure under `src/` (unit tests) or in `__tests__/` (integration/e2e).
 
 2. **Metadata Headers**
    Each source file must begin with a metadata header specifying application, package, file, version, author, date, and description.
@@ -53,89 +53,94 @@ Refer to `project_root/api/package.json` for exact dependency versions.
    # App: {{Application Name}}
    # Package: {{package}}
    # File: {{file name}}
-   # Version: 2.0.29
+   # Version: sematic versioning starting at 0.1.0
    # Author: {{author}}
-   # Date: {{current date/ time}}
-   # Description: document the function of the code.
+   # Date: {Timestamp when the change was made}
+   # Description:  level 5 documentation of the class or function.  Document each method or function in the file.  
    #
    ```
 
 3. **Test-Driven Development (TDD)**
 
-    * Write tests before implementing new functionality.
-    * Maintain a minimum of 80% code coverage.
-    * Name test files `<module>.spec.ts` or `<module>.test.ts`.
+   * Write unit tests before implementation.
+   * Name test files `<module>.test.ts`.
+   * Place unit tests in the same directory as the source code being tested
+   * Maintain a minimum 80% coverage.
+   * npm run test
+   * When creating new REST endpoints, create .http test for the resource.
+
+
 
 4. **Use of Modern Language & Framework Features**
 
-    * Use async/await, decorators, dependency injection, and pipe-based validation.
-    * Leverage NestJS features: modules, controllers, providers, guards, interceptors, and filters.
-    * Avoid deprecated APIs or experimental flags.
-    * Update dependencies regularly for security and feature improvements.
+   * Use async/await, decorators, dependency injection, and pipe-based validation.
+   * Leverage NestJS features: modules, controllers, providers, guards, interceptors, and filters.
+   * Avoid deprecated APIs or experimental flags.
+   * Update dependencies regularly for security and feature improvements.
 
 5. **Documentation**
 
-    * Maintain `project_root/api/README.md` with:
+   * Maintain `project_root/api/README.md` with:
 
-        * Overview and architecture
-        * Setup and build instructions
-        * API endpoint summary (e.g. Swagger/OpenAPI)
-        * Instructions for running migrations and seeding data
+      * Overview and architecture
+      * Setup and build instructions
+      * API endpoint summary (e.g. Swagger/OpenAPI)
+      * Instructions for running migrations and seeding data
 
 ## 5. Architectural Constraints
 
 1. **Multi-Environment Support**
 
-    * Environments: `local`, `development`, `staging`, `production`
-    * Active environment specified via `APP_ENV` or `NODE_ENV`.
+   * Environments: `local`, `dev`, `stage`, `prod`
+   * Active environment specified via `APP_ENV` or `NODE_ENV`.
 
 2. **Externalized & Validated Configuration**
 
-    * All settings (database URLs, credentials, feature flags) from environment variables.
-    * Validate on startup using a schema (e.g. Joi, Zod). Fail fast on missing/invalid values.
+   * All settings (database URLs, credentials, feature flags) from environment variables.
+   * Validate on startup using a schema (e.g. Joi, Zod). Fail fast on missing/invalid values.
 
 3. **Secret Management**
 
-    * Retrieve sensitive values (DB passwords, JWT secrets) from a secure vault or secrets manager at runtime.
-    * Never commit secrets to source control.
+   * Retrieve sensitive values (DB passwords, JWT secrets) from a secure vault or secrets manager at runtime.
+   * Never commit secrets to source control.
 
 4. **Logging & Monitoring**
 
-    * Configurable log levels via env var (`DEBUG`, `INFO`, `WARN`, `ERROR`).
-    * Emit structured JSON logs.
-    * Integrate with monitoring systems (e.g. Prometheus metrics, application performance tracing).
+   * Configurable log levels via env var (`DEBUG`, `INFO`, `WARN`, `ERROR`).
+   * Emit structured JSON logs.
+   * Integrate with monitoring systems (e.g. Prometheus metrics, application performance tracing).
 
 5. **Health Checks & Readiness**
 
-    * Expose `/health` and `/ready` endpoints for liveness/readiness probes.
-    * Health checks should verify DB connectivity and dependent services.
+   * Expose `/health` and `/ready` endpoints for liveness/readiness probes.
+   * Health checks should verify DB connectivity and dependent services.
 
 6. **API Documentation**
 
-    * Generate OpenAPI (Swagger) docs via NestJS decorators.
-    * Expose `/docs` or `/api-docs` endpoint in non-production environments.
+   * Generate OpenAPI (Swagger) docs via NestJS decorators.
+   * Expose `/docs` or `/api-docs` endpoint in non-production environments.
 
 7. **Error Handling & Validation**
 
-    * Use global exception filters to format errors uniformly.
-    * Validate request payloads with DTOs, Pipes, and class-validator.
-    * Return clear, structured error responses with appropriate HTTP status codes.
+   * Use global exception filters to format errors uniformly.
+   * Validate request payloads with DTOs, Pipes, and class-validator.
+   * Return clear, structured error responses with appropriate HTTP status codes.
 
 8. **Twelve-Factor Compliance**
 
-    * Strict separation of config from code.
-    * Build once, deploy the same artifact across all environments.
+   * Strict separation of config from code.
+   * Build once, deploy the same artifact across all environments.
 
 9. **CI/CD & Migrations**
 
-    * CI pipelines must run linting, tests, and build before merging.
-    * Database migrations managed via CLI; run at deployment time.
+   * CI pipelines must run linting, tests, and build before merging.
+   * Database migrations managed via CLI; run at deployment time.
 
 10. **Secure Defaults**
 
-    * Default to least-privilege database accounts.
-    * Enforce HTTPS and CORS policies.
-    * Sanitize all inputs to prevent injection attacks.
+   * Default to least-privilege database accounts.
+   * Enforce HTTPS and CORS policies.
+   * Sanitize all inputs to prevent injection attacks.
 
 ## 6. Agent Prompt Template
 
