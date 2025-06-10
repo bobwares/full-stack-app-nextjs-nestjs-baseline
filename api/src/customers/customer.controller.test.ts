@@ -1,11 +1,11 @@
 //  App: Initial Full-Stack Application
 //  Package: api
 //  File: src/customers/customer.controller.test.ts
-//  Version: 0.0.3
+//  Version: 0.0.4
 //  Author: Bobwares
 //  Date: 2025-06-10T00:00:00Z
 //  Description: Unit tests for CustomerController endpoints.
-// 
+//
 import { Test } from '@nestjs/testing';
 import { CustomerController } from './customer.controller';
 import { CustomerService } from './customer.service';

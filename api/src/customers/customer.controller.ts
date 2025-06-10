@@ -1,11 +1,11 @@
 //  App: Initial Full-Stack Application
 //  Package: api
 //  File: src/customers/customer.controller.ts
-//  Version: 0.0.3
+//  Version: 0.0.4
 //  Author: Bobwares
 //  Date: 2025-06-10T00:00:00Z
-//  Description: Controller exposing REST endpoints for Customer operations.
-// 
+//  Description: Controller exposing REST endpoints for CustomerProfile operations.
+//
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dtos/create-customer.dto';
