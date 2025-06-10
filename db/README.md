@@ -88,6 +88,24 @@ SELECT COUNT(*) FROM user_account;
 
 Expected output: number of rows inserted by `01_seed_reference_data.sql`.
 
+### Customer Domain Migration
+
+Run the customer tables migration and smoke tests:
+
+```bash
+docker compose up -d db
+docker exec -it fullstack_baseline_db \
+  psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
+  -f /docker-entrypoint-initdb.d/migrations/20250610120000_create_customer_tables.sql
+```
+
+After the migration completes, verify data:
+
+```sql
+SELECT COUNT(*) FROM customer;
+SELECT COUNT(*) FROM customer_email;
+```
+
 ---
 
 Questions? Contact **@Bobwares** on Slack (#backend-infra).
