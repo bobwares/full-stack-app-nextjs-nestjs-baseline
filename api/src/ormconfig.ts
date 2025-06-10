@@ -1,9 +1,9 @@
 //  App: Initial Full-Stack Application
 //  Package: api
 //  File: src/ormconfig.ts
-//  Version: 0.0.3
+//  Version: 0.0.4
 //  Author: Bobwares
-//  Date: 2025-06-10T00:00:00Z
+//  Date: 2025-06-10T15:17:19Z
 //  Description: TypeORM configuration loaded from environment variables.
 // 
 import { DataSource, DataSourceOptions } from 'typeorm';
@@ -13,7 +13,7 @@ envLoad();
 
 const options: DataSourceOptions = {
   type: 'postgres',
-  url: process.env.DATABASE_URL,
+  url: process.env.DATABASE_URL as string,
   entities: [Customer],
   migrations: ['dist/migrations/*.js'],
 };

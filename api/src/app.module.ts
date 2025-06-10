@@ -1,9 +1,9 @@
 //  App: Initial Full-Stack Application
 //  Package: api
 //  File: src/app.module.ts
-//  Version: 0.0.3
+//  Version: 0.0.4
 //  Author: Bobwares
-//  Date: 2025-06-10T00:00:00Z
+//  Date: 2025-06-10T15:17:19Z
 //  Description: Root module configuring TypeORM and feature modules.
 // 
 import { Module } from '@nestjs/common';
@@ -16,7 +16,7 @@ import { CustomerModule } from './customers/customer.module';
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABASE_URL,
+      url: process.env.DATABASE_URL as string,
       autoLoadEntities: true,
       synchronize: false,
     }),
