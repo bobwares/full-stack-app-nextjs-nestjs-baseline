@@ -14,13 +14,15 @@ Leverage the task definition in `project_root/db/tasks/TASK - DB - JSON to SQL T
 
 **Acceptance Criteria**
 
-* `db/migrations/20250610120000_create_customer_tables.sql`:
-
+* `project_root/db/migrations/20250610120000_create_customer_tables.sql`:
     * Contains a metadata header block.
     * Uses `CREATE TABLE IF NOT EXISTS` statements valid for PostgreSQL 16.
     * Implements all keys, constraints, and indexes required by the JSON schema.
     * Provides at least three sample `INSERT` statements per table.
     * Concludes with smoke-test SQL (e.g., `SELECT COUNT(*)`, simple join checks).
+* `project_root/db/scripts/seed/NN_customer_data.sql`:
+    * Contains a metadata header block.  
+    * contains insert statements for creating 10 test records.
 * The migration runs cleanly with `psql -f` inside the project’s Docker container (`docker-compose up db`).
 * Naming conventions, timestamp format, and directory layout match project standards.
 * `project_root/db/README.md` gains a short “Customer Domain Migration” section describing how to execute the migration and smoke tests locally.
@@ -33,8 +35,9 @@ Leverage the task definition in `project_root/db/tasks/TASK - DB - JSON to SQL T
 
 **Expected Outputs**
 
-* `db/migrations/20250610120000_create_customer_tables.sql`
-* (Optional) `db/test/customer_tables_smoke.sql` if smoke tests are broken out
+* `project_root/db/migrations/20250610120000_create_customer_tables.sql`
+* `project_root/db/scripts/seed/NN_customer_data.sql`
+* `project_root/db/test/customer_tables_smoke.sql` if smoke tests are broken out
 * Update to `project_root/db/README.md` under the “Migrations” section
 
 **Workflow Outline**
