@@ -1,28 +1,45 @@
-# Project Context
+# AI-Agent Context and Prompt Templates
 
-Application Name: Initial Full-Stack Application
-Author: Bobwares
+This document provides guidelines and prompt templates for AI coding agents (e.g., Codex, Copilot, LangChain) to generate high-quality code for the  project. These instructions ensure consistency, adherence to project conventions, and efficient code generation for the Next.js front-end, NestJS back-end, database schemas, and related components.
 
-## Overview
+## Project Overview
 
-This is a full-stack application. 
+The goal is to generate maintainable, type-safe, and modular code that aligns with the existing structure and conventions.
 
-### Directory Structure
+### About
+- GitHub repository: full-stack-app-nextjs-nestjs-baseline
+- Application Name: Initial Full-Stack Application
+- Author: Bobwares
 
-project_root/
-    api - backend application
-    ui - front-end application
-    schemas - definition of objects passed between the front-end and backend apps. 
+This repository is a full-stack application baseline with:
+- **Front-end**: Next.js (`ui/`) for server-rendered React pages and client-side navigation.
+- **Back-end**: NestJS (`api/`) for RESTful APIs with TypeScript and dependency injection.
+- **Database**: PostgreSQL (`db/`) with migrations and seed scripts.
+- **Schemas**: JSON schemas (`schemas/`) to integrate UI and API.
 
 
+### Coding Versioning
 
-### Versioning
-
-- create file project_root/version.md with updated version number and list of changes. Include date and time of change and branch name.
+- Use sematic versioning.
+- create file project_root/version.md with updated version number and list of changes.
 - Start version at 0.0.1
 - Update version each time the code is updated.
 - Update only code or configuration files that have changed.
 
+- Example
+
+    ```markdown
+    
+    # Version History
+    
+    ### 0.0.1 - 2025-06-08 06:58:24 UTC (main)
+    - Initial project structure and configuration.
+    
+    ### 0.0.2 - 2025-06-08 07:23:08 UTC (work)
+    - add tsconfig for ui and api
+    - create src directories with unit test folders
+    - add e2e test directory for Playwright
+    ```
 
 ### Documentation Expectations
 
@@ -41,8 +58,7 @@ project_root/
   #
   ```
 
-
-### Git Workflow Conventions 
+### Git Workflow Conventions
 
 ### 1. Branch Naming
 
@@ -136,7 +152,7 @@ Copy this template into the PR description. The AI agent must fill every section
 
 **PR Rules**
 
-1. Title: `type: concise summary (ticket-id)`  → e.g. `feat: in-place address editing (T1234)`.
+1. Title: `type: concise summary (ticket-id)`  → e.g. `feat: in-place address editing (T1234)`.
 2. Keep PRs focused: one logical change, ≤ 400 LOC whenever reasonable.
 3. Include links to relevant design docs or ADRs.
 4. Assign at least one reviewer knowledgeable in the affected area.
@@ -148,4 +164,3 @@ Copy this template into the PR description. The AI agent must fill every section
 Adhering to these conventions ensures the coding agent produces consistent, readable history and automates releases, changelogs, and traceability with minimal friction.
 
 End of Document
-
