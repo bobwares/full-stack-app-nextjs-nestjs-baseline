@@ -6,8 +6,8 @@ Project: <project-name>
 Directory: /db
 
 **Task**:
-Create a seed script in `db/scripts/seed/01_seed_customers.sql` that:
-- Inserts 3 sample customers into the `customer` table (columns: `customer_id`, `name`, `email`)
+Create a seed script in `db/scripts/seed/01_seed_<resource>.sql` that:
+- Inserts 10 sample customers into the `customer` table (columns: `customer_id`, `name`, `email`)
 - Ensures idempotency using `ON CONFLICT DO NOTHING`
 - Includes a metadata header and smoke test query
 

@@ -1,119 +1,112 @@
-# AI-Agent Context and Prompt Templates
+# Project AI Coding Agent Context
 
-This document provides guidelines and prompt templates for AI coding agents (e.g., Codex, Copilot, LangChain) to generate high-quality code for the  project. These instructions ensure consistency, adherence to project conventions, and efficient code generation for the Next.js front-end, NestJS back-end, database schemas, and related components.
+This document provides guidelines and prompt templates for AI coding agents (e.g., Codex, Copilot, LangChain) to generate high-quality code for the **full-stack-app-nextjs-nestjs-baseline** project. These instructions ensure consistency, adherence to project conventions, and efficient code generation for the Next.js front end, NestJS back end, database schemas, and related components.
+
+---
 
 ## Project Overview
 
-The goal is to generate maintainable, type-safe, and modular code that aligns with the existing structure and conventions.
+Generate maintainable, type-safe, and modular code that aligns with the existing structure and conventions.
 
-### About
-- GitHub repository: full-stack-app-nextjs-nestjs-baseline
-- Application Name: Initial Full-Stack Application
-- Author: Bobwares
+| Item                  | Value                                   |
+| --------------------- | --------------------------------------- |
+| **GitHub repository** | `full-stack-app-nextjs-nestjs-baseline` |
+| **Application name**  | Full-Stack Application                  |
+| **Author**            | Bobwares CodeBot                        |
 
-This repository is a full-stack application baseline with:
-- **Front-end**: Next.js (`ui/`) for server-rendered React pages and client-side navigation.
-- **Back-end**: NestJS (`api/`) for RESTful APIs with TypeScript and dependency injection.
-- **Database**: PostgreSQL (`db/`) with migrations and seed scripts.
-- **Schemas**: JSON schemas (`schemas/`) to integrate UI and API.
+**Directory summary**
 
+| Path       | Purpose                                                       |
+| ---------- | ------------------------------------------------------------- |
+| `ui/`      | Next.js front-end (server-rendered React + client navigation) |
+| `api/`     | NestJS back-end (TypeScript REST APIs)                        |
+| `db/`      | PostgreSQL migrations and seed scripts                        |
+| `schemas/` | JSON schemas shared between UI and API                        |
 
-### Coding Versioning
+---
 
-- Use sematic versioning.
-- create file project_root/version.md with updated version number and list of changes.
-- Start version at 0.0.1
-- Update version each time the code is updated.
-- Update only code or configuration files that have changed.
+## Versioning Rules
 
-- Example
+* Use **semantic versioning** (`MAJOR.MINOR.PATCH`).
+* Track changes in `project_root/version.md`.
+* Start at **0.0.1**; update only when code or configuration changes.
+* Record just the sections that changed.
 
-    ```markdown
-    
-    # Version History
-    
-    ### 0.0.1 - 2025-06-08 06:58:24 UTC (main)
-    - Initial project structure and configuration.
-    
-    ### 0.0.2 - 2025-06-08 07:23:08 UTC (work)
-    - add tsconfig for ui and api
-    - create src directories with unit test folders
-    - add e2e test directory for Playwright
-    ```
+```markdown
+# Version History
 
-### Documentation Expectations
+### 0.0.1 – 2025-06-08 06:58:24 UTC (main)
+- Initial project structure and configuration.
 
-* **Always include a metadata header section** at the top of every source code file.
+### 0.0.2 – 2025-06-08 07:23:08 UTC (work)
+- Add tsconfig for ui and api
+- Create src directories with unit-test folders
+- Add e2e test directory for Playwright
+```
 
-* Definition of metadata header section:
+---
 
-  ```markdown
-  # App: {{Application Name}}
-  # Package: {{package}}
-  # File: {{file name}}
-  # Version: 0.1.0
-  # Author: {{author}}
-  # Date: {{current date/ time}}
-  # Description: document the function of the code.
-  #
-  ```
+## File-Level Metadata Header
 
-### Git Workflow Conventions
+Every source file **must** begin with:
+
+```markdown
+# App: {{Application Name}}
+# Package: {{package}}
+# File: {{file name}}
+# Version: {{version}}
+# Author: {{author}}
+# Date: {{current date/ time}}
+# Description: {{short description of the file’s purpose}}
+#
+```
+
+---
+
+## Git Workflow Conventions
 
 ### 1. Branch Naming
-
-Use **lower-case kebab-case** with a noun-verb prefix that describes the intent, followed by a concise summary and an optional ticket ID.
 
 ```
 <type>/<short-description>-<ticket-id?>
 ```
 
-| Type Prefix | Purpose                               | Example                           |
-| ----------- | ------------------------------------- | --------------------------------- |
-| `feat`      | New feature                           | `feat/profile-photo-upload-T1234` |
-| `fix`       | Bug fix                               | `fix/login-csrf-T5678`            |
-| `chore`     | Tooling, build, or dependency changes | `chore/update-eslint-T0021`       |
-| `docs`      | Documentation only                    | `docs/api-error-codes-T0099`      |
-| `refactor`  | Internal code change w/out behaviour  | `refactor/db-repository-T0456`    |
-| `test`      | Adding or improving tests             | `test/profile-service-T0789`      |
-| `perf`      | Performance improvement               | `perf/query-caching-T0987`        |
+| Type       | Purpose                                | Example                           |
+| ---------- | -------------------------------------- | --------------------------------- |
+| `feat`     | New feature                            | `feat/profile-photo-upload-T1234` |
+| `fix`      | Bug fix                                | `fix/login-csrf-T5678`            |
+| `chore`    | Tooling, build, or dependency updates  | `chore/update-eslint-T0021`       |
+| `docs`     | Documentation only                     | `docs/api-error-codes-T0099`      |
+| `refactor` | Internal change w/out behaviour change | `refactor/db-repository-T0456`    |
+| `test`     | Adding or improving tests              | `test/profile-service-T0789`      |
+| `perf`     | Performance improvement                | `perf/query-caching-T0987`        |
 
 **Rules**
 
-1. Use one branch per ticket or atomic change.
-2. Do **not** commit directly to `main` or `develop`.
-3. Re-base on the target branch before opening a pull request (PR).
+1. One branch per ticket or atomic change.
+2. **Never** commit directly to `main` or `develop`.
+3. Re-base on the target branch before opening a pull request.
 
 ---
 
-### 2. Commit Message Style (Conventional Commits)
+### 2. Commit Messages (Conventional Commits)
 
 ```
 <type>(<optional-scope>): <short imperative summary>
 <BLANK LINE>
-Optional multi-line body explaining the what/why.
-Wrap lines at 72 characters.
+Optional multi-line body (wrap at 72 chars).
 <BLANK LINE>
 Refs: <ticket-id(s)>
 ```
 
-* **Type**: Same prefixes as in branch naming table.
-* **Scope**: Small, code-based area (e.g., `profile-ui`, `auth-service`).
-* **Summary**: Start with a verb (e.g., “add”, “fix”, “remove”), no trailing period.
-* **Body** (optional):
-
-    * Explain *why* the change was needed.
-    * High-level design notes, trade-offs, or follow-ups.
-* **Footer** (`Refs:`): List ticket IDs or tasks that the commit closes or relates to.
-
-**Example**
+Example:
 
 ```
 feat(profile-ui): add in-place address editing
 
 Allows users to update their address directly on the Profile Overview
-card without navigating to a separate page. Uses optimistic UI updates
-and server-side validation.
+card without navigating away. Uses optimistic UI and server-side
+validation.
 
 Refs: T1234
 ```
@@ -122,11 +115,14 @@ Refs: T1234
 
 ### 3. Pull-Request Summary Template
 
-Copy this template into the PR description. The AI agent must fill every section.
+Copy this template into every PR description and fill in each placeholder.
 
-```
+```markdown
 # Summary
 <!-- One-sentence description of the change. -->
+
+# Codex Task
+[{{task-name}}](https://chatgpt.com/codex/tasks/{{task-id}} "Open task in Codex")
 
 # Details
 * **What was added/changed?**
@@ -138,29 +134,76 @@ Copy this template into the PR description. The AI agent must fill every section
 - T1300 Validation Rules
 
 # Checklist
+- [ ] Unit tests pass (`npm test` / `pytest`)
 - [ ] Integration tests pass
-* If the changes are limited to `/db/`, skip `npm test` and run database checks only (e.g., `make db-test`).
-- [ ] Linter passes (`eslint`)
-- [ ] Documentation updated (`README.md`, API docs)
+- [ ] Linter passes (`eslint` / `ruff`)
+- [ ] Documentation updated
 
 # Screenshots / Demo (if UI)
-<!-- Drop short text description or links to images/videos -->
+<!-- Short description or links -->
 
 # Breaking Changes
-<!-- List any backward-incompatible changes, or “None” -->
+<!-- List backward-incompatible changes, or “None” -->
 ```
 
 **PR Rules**
 
-1. Title: `type: concise summary (ticket-id)`  → e.g. `feat: in-place address editing (T1234)`.
-2. Keep PRs focused: one logical change, ≤ 400 LOC whenever reasonable.
-3. Include links to relevant design docs or ADRs.
-4. Assign at least one reviewer knowledgeable in the affected area.
-5. Merge strategy:
+1. Title: `type: concise summary (ticket-id)`  →  `feat: in-place address editing (T1234)`.
+2. Keep PRs focused: one logical change, ideally ≤ 400 LOC.
+3. Link to relevant design docs or ADRs.
+4. Assign at least one knowledgeable reviewer.
+5. **Squash merge** into `develop`, using the PR title as the squash commit message.
 
-    * **Squash merge** into `develop`
-    * Use the PR title as the squash commit message.
+---
 
-Adhering to these conventions ensures the coding agent produces consistent, readable history and automates releases, changelogs, and traceability with minimal friction.
+## Tickets and Agile Stories
 
-End of Document
+* A **ticket** in your tracker (Jira, GitHub Issues, etc.) maps directly to an **agile story**, task, bug, or epic.
+* Reference its ID everywhere: branch names, commits, PR template “Related Tickets”.
+* Automation should transition ticket status when the PR merges or deploys.
+
+---
+
+### Automated Task-Run Logs
+
+After every Codex task completes, **copy the sandbox log to the repository and commit it** so reviewers have a permanent audit trail.
+
+1. **Locate the log file**
+   Codex writes a timestamped log to the environment variable `CODEX_LOG_PATH` (fallback paths:
+   `~/Library/Logs/oai-codex/` · `$XDG_STATE_HOME/oai-codex/` · `%TEMP%\oai-codex\`).
+
+2. **Copy into the repo**
+
+   ```bash
+   #!/usr/bin/env bash
+   set -euo pipefail
+
+   # 1. Resolve latest log
+   LOG_FILE="${CODEX_LOG_PATH:-$(ls -1t ~/Library/Logs/oai-codex/codex-cli-*.log 2>/dev/null | head -n1)}"
+
+   # 2. Define repo location
+   DEST_DIR="logs/codex"
+   mkdir -p "$DEST_DIR"
+
+   # 3. Name file: codex-<task-id>-YYYYMMDDTHHMMSSZ.log
+   TS=$(date -u +"%Y%m%dT%H%M%SZ")
+   FILE_BASENAME="codex-${TASK_ID:-unknown}-${TS}.log"
+   cp "$LOG_FILE" "${DEST_DIR}/${FILE_BASENAME}"
+   ```
+
+3. **Commit and push** (same branch that implemented the task)
+
+   ```bash
+   git add "${DEST_DIR}/${FILE_BASENAME}"
+   git commit -m "chore(logs): add Codex sandbox log for task ${TASK_ID:-unknown}"
+   git push origin "$(git rev-parse --abbrev-ref HEAD)"
+   ```
+
+4. **House-keeping**
+
+   * Keep only the most recent **20** log files per branch (`find logs/codex -type f | sort | head -n -20 | xargs rm -f`).
+   * Logs contain no secrets—Codex automatically redacts tokens and passwords.
+
+> **Coding Agent MUST** execute the script above (or equivalent steps) at the end of every task run. This guarantees each PR includes its full sandbox log under `logs/codex/`, preserving reproducibility and review visibility.
+
+*End of AGENTS.md*
