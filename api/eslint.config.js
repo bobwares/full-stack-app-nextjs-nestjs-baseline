@@ -1,6 +1,10 @@
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import typescriptParser from '@typescript-eslint/parser';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import prettierPlugin from 'eslint-plugin-prettier';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default [
   // 1) Global ignores
@@ -14,7 +18,7 @@ export default [
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
-        project: ['./tsconfig.json'],
+        project: ['./tsconfig.eslint.json'],
         tsconfigRootDir: __dirname,
         sourceType: 'module',
       },
@@ -22,15 +26,7 @@ export default [
     plugins: {
       '@typescript-eslint': typescriptPlugin,
       prettier: prettierPlugin,
-      // Optional: uncomment if you install nestjs-typed
-      // 'nestjs-typed': require('eslint-plugin-nestjs-typed'),
     },
-    extends: [
-      'plugin:@typescript-eslint/strict-type-checked',
-      'plugin:@typescript-eslint/stylistic-type-checked',
-      'plugin:prettier/recommended',
-      // Optional: 'plugin:@darraghor/nestjs-typed/recommended',
-    ],
     rules: {
       // General best practices
       'prettier/prettier': 'error',

@@ -1,0 +1,30 @@
+### Create Customer
+POST http://localhost:3001/customers
+Content-Type: application/json
+
+{
+  "id": "11111111-1111-1111-1111-111111111111",
+  "firstName": "John",
+  "lastName": "Doe",
+  "emails": ["john@example.com"],
+  "phoneNumbers": [{"type": "mobile", "number": "+123456789"}],
+  "address": {"line1": "123 St", "city": "Met", "state": "NY", "postalCode": "1", "country": "US"},
+  "privacySettings": {"marketingEmailsEnabled": true, "twoFactorEnabled": false}
+}
+
+### Get Customers
+GET http://localhost:3001/customers
+
+### Get Customer by ID
+GET http://localhost:3001/customers/11111111-1111-1111-1111-111111111111
+
+### Update Customer
+PUT http://localhost:3001/customers/11111111-1111-1111-1111-111111111111
+Content-Type: application/json
+
+{
+  "firstName": "Jane"
+}
+
+### Delete Customer
+DELETE http://localhost:3001/customers/11111111-1111-1111-1111-111111111111
