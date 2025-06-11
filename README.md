@@ -142,7 +142,7 @@ A basic REST API is exposed under `/api`:
 * **PUT** `/customers/:id` – Update a customer
 * **DELETE** `/customers/:id` – Delete a customer
 
-If Swagger is enabled, visit `http://localhost:3001/api` to explore the API documentation.
+If Swagger is enabled, visit `http://localhost:3001/docs` to explore the API documentation.
 
 ---
 
