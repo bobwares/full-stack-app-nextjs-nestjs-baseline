@@ -12,3 +12,7 @@
 ### 0.0.3 - 2025-06-11T05:37:00Z (task-03-create-customer-crud-endpoints)
 - fix ESLint config and tests
 - add missing sqlite3 dependency for e2e tests
+
+### 0.0.4 - 2025-06-11T11:30:00Z (fix-swagger-link)
+- enable Swagger docs at /docs
+- update documentation

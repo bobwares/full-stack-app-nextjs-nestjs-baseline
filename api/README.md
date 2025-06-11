@@ -70,6 +70,10 @@ npm run test:coverage
 
 Test files follow the naming conventions `<module>.spec.ts` or `<module>.test.ts` and mirror the `src/` structure.
 
+## API Documentation
+
+During development, Swagger documentation is available at `http://localhost:3001/docs` when the server is running.
+
 ## Database Migrations
 
 If using TypeORM:
