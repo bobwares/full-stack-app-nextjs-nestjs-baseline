@@ -166,3 +166,13 @@ See `AGENTS.md` for prompt templates and project conventions used by AI coding a
 
 Adhere to the coding conventions and metadata header rules defined in `AGENTS.md`.
 
+
+### Customers API
+
+| Method | Endpoint | Description |
+| ------ | -------- | ----------- |
+| GET | `/customers` | List all customers |
+| GET | `/customers/:id` | Retrieve a customer by ID |
+| POST | `/customers` | Create a new customer |
+| PUT | `/customers/:id` | Update an existing customer |
+| DELETE | `/customers/:id` | Remove a customer |
