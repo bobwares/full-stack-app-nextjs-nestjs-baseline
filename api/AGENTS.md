@@ -204,8 +204,6 @@ Implement `users.controller.ts` and `users.service.ts` under `src/users/`:
 - Three code fences: controller, service, DTOs plus two fences for tests
 ```
 
-Keeping prompts precise and consistent ensures Codex reliably generates back-end code that adheres to project standards, conventions, and architectural requirements.
-
 ### Examples
 
 File: package.json
@@ -964,4 +962,4 @@ export class JobsService {
 }
 ```
 
-End of Document
+*End of AGENTS.md*

@@ -1,4 +1,4 @@
-# Story 02 – Create set of test data
+# Ticket 02 – Create set of test data
 
 **Description**
 Leverage the task definition in `project_root/db/tasks/TASK - DB - JSON to SQL Transformation.md` to transform the **Customer Domain** JSON schema into a fully normalized PostgreSQL 16 schema. The deliverable is a timestamped migration that:

@@ -17,5 +17,9 @@ Create a seed script in `db/scripts/seed/01_seed_<resource>.sql` that:
 - Include realistic sample data
 - Include timestamps in UTC
 
+**Inputs**
+
+
+
 **Output**:
 A complete SQL file with metadata header, `INSERT` statements, and smoke test.

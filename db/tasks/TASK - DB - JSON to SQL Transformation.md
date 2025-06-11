@@ -1,32 +1,39 @@
 **Context**:  
-Convert a JSON schema into normalized PostgreSQL `CREATE TABLE` statements.  
-Tech: PostgreSQL 16, Plain SQL, Docker  
-Env: { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, DATABASE_URL }  
-Project: `<project-name>`  
+Convert a JSON schema into normalized DDL SQL statements.  
 Directory: `/db`
 
 **Constraints**:
-- File path: db/migrations/20250610120000_create_order_tables.sql
 - Use PostgreSQL v16 dialect
 - Normalize to at least 3NF
 - Use singular table names (e.g., customer, order_item)
 - Include indexes for foreign keys and queryable fields
 - Use CREATE TABLE IF NOT EXISTS
 - Follow project naming conventions
+- Replace NN in file path with incremented number. ie db/migrations/01_<domain>_.sql
 
+**Inputs**
+
+- Domain: referenced in Ticket.
+- JSON Schema referenced in Ticket.
 
 **Output**:  
-A complete SQL file with metadata header, table definitions, indexes, sample data inserts, and smoke tests.
+
+- A complete SQL file with metadata header, table definitions, foreign keys, and indexes.
+- File path: db/migrations/NN_<domain>_.sql
 
 **Task**:  
 Generate a migration in `db/migrations/NN_<schema title>_tables.sql` that:
-- Creates normalized tables from the JSON schema below
+- Creates normalized tables from the JSON schema referenced in ticket.
 - Infers data types and constraints (PRIMARY KEY, FOREIGN KEY, UNIQUE)
 - Maps nested objects ie (`customer`, `shipping_address`) to separate tables
 - Converts arrays (`items`) to a related table
-- Includes a metadata header and smoke tests
+- Includes a metadata header.
 
-Example: 
+Example Execution: 
+
+**Inputs**
+domain = customer_profile
+
 
 **JSON Schema**:
 ```json
