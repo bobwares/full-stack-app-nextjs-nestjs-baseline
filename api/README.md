@@ -22,14 +22,20 @@ Refer to `package.json` in `project_root/api/` for exact dependency versions.
 
 ## Environment Variables
 
-Create a `.env` file in the `project_root/api/` directory with entries such as:
+Create environment files named `.env.<environment>.example` and copy the one
+matching your target environment to `.env.<environment>`.
+Available environments are `local`, `dev`, `stage`, `prod`, and `codex`.
+Example contents:
 
 ```env
-APP_ENV=development
+APP_ENV=local
 PORT=3001
-DATABASE_URL=postgres://user:password@localhost:5432/dbname
-JWT_SECRET=your_jwt_secret
+DATABASE_URL=postgres://user:password@localhost:5432/localdb
+JWT_SECRET=local_secret
 ```
+
+The `codex` environment uses SQLite, so `DATABASE_URL` should point to the
+SQLite file (e.g., `codex.sqlite`).
 
 Adjust values for your local, staging, or production environments.
 

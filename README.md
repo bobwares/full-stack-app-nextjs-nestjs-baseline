@@ -65,18 +65,18 @@ This repository provides a minimal, opinionated baseline for building a modern f
 
 ### Environment Variables
 
-Copy and populate the example environment files:
+Copy and populate the example environment files for the desired environment:
 
 ```bash
-cp api/.env.example api/.env
+cp api/.env.local.example api/.env.local
 cp ui/.env.example ui/.env
 ```
 
 Typical variables:
 
 ```dotenv
-# api/.env
-DATABASE_URL=postgres://user:password@localhost:5432/mydb
+# api/.env.local
+DATABASE_URL=postgres://user:password@localhost:5432/localdb
 PORT=3001
 
 # ui/.env
