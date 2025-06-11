@@ -16,3 +16,8 @@
 ### 0.0.4 - 2025-06-11T11:30:00Z (fix-swagger-link)
 - enable Swagger docs at /docs
 - update documentation
+
+### 0.0.5 - 2025-06-11 (multi-env-config)
+- add environment-based configuration with SQLite for codex
+- provide sample env files for all environments
+- update READMEs and gitignore
