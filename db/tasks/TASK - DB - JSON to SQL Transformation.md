@@ -1,3 +1,6 @@
+# TASK - DB - JSON to SQL Transformation
+
+
 **Context**:  
 Convert a JSON schema into normalized DDL SQL statements.  
 Directory: `/db`
@@ -27,9 +30,23 @@ Generate a migration in `db/migrations/NN_<schema title>_tables.sql` that:
 - Infers data types and constraints (PRIMARY KEY, FOREIGN KEY, UNIQUE)
 - Maps nested objects ie (`customer`, `shipping_address`) to separate tables
 - Converts arrays (`items`) to a related table
-- Includes a metadata header.
+- Creates a flattened views of the domain. 
 
-Example Execution: 
+**Workflow Outline**
+
+1. **Review the DB task file** to confirm conventions, timestamp rules, and required header fields.
+2. **Parse the customer JSON schema** to derive an entity-relationship outline (e.g., `customer`, `customer_address`, `customer_contact`, etc.).
+3. **Draft SQL** with all constraints and indexes (`btree` on foreign keys, `GIN` or `btree` on heavily-queried columns).
+
+**Acceptance Criteria**
+* Expected Outputs were created.
+* Each file contains a metadata header block.
+* Uses `CREATE TABLE IF NOT EXISTS` statements valid for PostgreSQL 16.
+* Implements all keys, constraints, and indexes required by the JSON schema.
+* Naming conventions, timestamp format, and directory layout match project standards.
+* `project_root/db/README.md` gains a short “Domain Migration” section describing how to execute the migration and smoke tests locally.
+
+## Example Execution 
 
 **Inputs**
 domain = customer_profile
