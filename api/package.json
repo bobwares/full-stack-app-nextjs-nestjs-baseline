@@ -55,6 +55,7 @@
     "ts-jest": "^29.3.4",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
+    "typeorm-naming-strategies": "^4.1.0",
     "typescript": "^5.8.3"
   }
 }
