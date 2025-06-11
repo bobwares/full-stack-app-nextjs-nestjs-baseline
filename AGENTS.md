@@ -28,17 +28,28 @@ Generate maintainable, type-safe, and modular code that aligns with the existing
 ## Versioning Rules
 
 * Use **semantic versioning** (`MAJOR.MINOR.PATCH`).
-* Track changes in `project_root/version.md`.
-* Start at **0.0.1**; update only when code or configuration changes.
+* Track changes each "AI turn" in the file `project_root/version.md`.
+* Start at **0.1.0**; update only when code or configuration changes.
 * Record just the sections that changed.
 
 ```markdown
 # Version History
 
 ### 0.0.1 – 2025-06-08 06:58:24 UTC (main)
+
+#### Task 
+<Task>
+
+#### Changes
+
 - Initial project structure and configuration.
 
 ### 0.0.2 – 2025-06-08 07:23:08 UTC (work)
+
+#### Task 
+<Task>
+
+#### Changes
 - Add tsconfig for ui and api
 - Create src directories with unit-test folders
 - Add e2e test directory for Playwright
@@ -57,9 +68,15 @@ Every source file **must** begin with:
 # Version: {{version}}
 # Author: {{author}}
 # Date: {{current date/ time}}
-# Description: {{short description of the file’s purpose}}
+# Description: {{level 5 description of the file’s purpose. include prompting cues for AI.}}
 #
 ```
+
+---
+
+## function/class-Level Comments
+
+Add a comments to source code files.  Follow standards for comment by language.
 
 ---
 
@@ -223,7 +240,7 @@ project_root/adr/
 ### When the Agent Must Create an ADR
 
 | Scenario                                                     | Example                                                        | Required? |
-| ------------------------------------------------------------ | -------------------------------------------------------------- | --------- |
+|--------------------------------------------------------------|----------------------------------------------------------------|-----------|
 | Selecting one library or pattern over plausible alternatives | Choosing Prisma instead of TypeORM                             | **Yes**   |
 | Introducing a new directory or module layout                 | Splitting `customer` domain into bounded contexts              | **Yes**   |
 | Changing a cross-cutting concern                             | Switching error-handling strategy to functional `Result` types | **Yes**   |
@@ -260,8 +277,8 @@ List the trade-offs and implications (positive and negative).
 
 1. Before implementing a change that meets the criteria above, the agent must:
 
-   * Evaluate alternatives and decide.
-   * Generate a new ADR file using the template.
+    * Evaluate alternatives and decide.
+    * Generate a new ADR file using the template.
 2. Commit the ADR **in the same pull request** as the code change so reviewers can assess both simultaneously.
 3. If a later change supersedes an ADR, create a new ADR that references and deprecates the original.
 

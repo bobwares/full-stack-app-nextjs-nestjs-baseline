@@ -1,11 +1,11 @@
-# App: Full-Stack Application
-# Package: api
-# File: src/ormconfig.ts
-# Version: 0.1.0
-# Author: Bobwares CodeBot
-# Date: 2025-06-11
-# Description: Provides TypeORM configuration based on environment variables.
-#
+// # App: Full-Stack Application
+// # Package: api
+// # File: src/ormconfig.ts
+// # Version: 0.1.0
+// # Author: Bobwares CodeBot
+// # Date: 2025-06-11
+// # Description: Provides TypeORM configuration based on environment variables.
+// #
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import {
