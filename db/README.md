@@ -86,7 +86,16 @@ In `psql`, run:
 SELECT COUNT(*) FROM user_account;
 ```
 
+
 Expected output: number of rows inserted by `01_seed_reference_data.sql`.
+
+## Customer Domain Migration
+
+Run the migration and smoke tests:
+```
+docker compose run --rm db psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f /docker-entrypoint-initdb.d/migrations/20250610120000_create_customer_tables.sql
+psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f db/test/customer_tables_smoke.sql
+```
 
 ---
 
