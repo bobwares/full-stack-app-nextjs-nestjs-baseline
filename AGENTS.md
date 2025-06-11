@@ -178,17 +178,19 @@ After every Codex task completes, **copy the sandbox log to the repository and c
    #!/usr/bin/env bash
    set -euo pipefail
 
-   # 1. Resolve latest log
+      # 1. Resolve latest log
    LOG_FILE="${CODEX_LOG_PATH:-$(ls -1t ~/Library/Logs/oai-codex/codex-cli-*.log 2>/dev/null | head -n1)}"
-
    # 2. Define repo location
    DEST_DIR="logs/codex"
    mkdir -p "$DEST_DIR"
-
    # 3. Name file: codex-<task-id>-YYYYMMDDTHHMMSSZ.log
    TS=$(date -u +"%Y%m%dT%H%M%SZ")
    FILE_BASENAME="codex-${TASK_ID:-unknown}-${TS}.log"
    cp "$LOG_FILE" "${DEST_DIR}/${FILE_BASENAME}"
+
+   git add "${DEST_DIR}/${FILE_BASENAME}"
+   git commit -m "chore(logs): add Codex sandbox log for task ${TASK_ID:-unknown}"
+   git push origin "$(git rev-parse --abbrev-ref HEAD)"
    ```
 
 3. **Commit and push** (same branch that implemented the task)
@@ -205,5 +207,69 @@ After every Codex task completes, **copy the sandbox log to the repository and c
     * Logs contain no secrets—Codex automatically redacts tokens and passwords.
 
 > **Coding Agent MUST** execute the script above (or equivalent steps) at the end of every task run. This guarantees each PR includes its full sandbox log under `logs/codex/`, preserving reproducibility and review visibility.
+
+## ADR (Architecture Decision Record) Folder
+
+### Purpose
+
+The `/adr` folder captures **concise, high-signal Architecture Decision Records** whenever the AI coding agent (or a human) makes a non-obvious technical or architectural choice. Storing ADRs keeps the project’s architectural rationale transparent and allows reviewers to understand **why** a particular path was taken without trawling through commit history or code comments.
+
+### Location
+
+```
+project_root/adr/
+```
+
+### When the Agent Must Create an ADR
+
+| Scenario                                                     | Example                                                        | Required? |
+| ------------------------------------------------------------ | -------------------------------------------------------------- | --------- |
+| Selecting one library or pattern over plausible alternatives | Choosing Prisma instead of TypeORM                             | **Yes**   |
+| Introducing a new directory or module layout                 | Splitting `customer` domain into bounded contexts              | **Yes**   |
+| Changing a cross-cutting concern                             | Switching error-handling strategy to functional `Result` types | **Yes**   |
+| Cosmetic or trivial change                                   | Renaming a variable                                            | No        |
+
+### Naming Convention
+
+```
+adr/YYYYMMDDnnn_<slugified-title>.md
+```
+
+* `YYYYMMDD` – calendar date in UTC
+* `nnn` – zero-padded sequence number for that day
+* `slugified-title` – short, lowercase, hyphen-separated summary
+
+Example: `adr/20250611_001_use-prisma-for-orm.md`.
+
+### Minimal ADR Template
+
+```markdown
+# {{ADR Title}}
+
+**Status**: Proposed | Accepted | Deprecated  
+**Date**: {{YYYY-MM-DD}}  
+**Context**  
+Briefly explain the problem or decision context.  
+**Decision**  
+State the choice that was made.  
+**Consequences**  
+List the trade-offs and implications (positive and negative).  
+```
+
+### Agent Workflow
+
+1. Before implementing a change that meets the criteria above, the agent must:
+
+   * Evaluate alternatives and decide.
+   * Generate a new ADR file using the template.
+2. Commit the ADR **in the same pull request** as the code change so reviewers can assess both simultaneously.
+3. If a later change supersedes an ADR, create a new ADR that references and deprecates the original.
+
+### Human Review
+
+* Reviewers should treat ADRs as first-class documentation and request clarifications when the **Context** or **Consequences** sections are vague.
+* Once accepted, ADRs are **never edited**, only superseded, to preserve historical context.
+
+
 
 *End of AGENTS.md*
