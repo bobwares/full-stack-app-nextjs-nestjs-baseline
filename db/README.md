@@ -71,6 +71,17 @@ docker compose down
 docker compose build --no-cache db  
 docker compose up -d  
 ```
+## Migrations
+
+### Customer Domain Migration
+Run:
+```bash
+docker exec -it fullstack_baseline_db 
+  psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" 
+  -f /docker-entrypoint-initdb.d/migrations/20250610120000_create_customer_tables.sql
+psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f test/customer_tables_smoke.sql
+```
+
 
 ## 5. Schema Objects (snapshot)
 
