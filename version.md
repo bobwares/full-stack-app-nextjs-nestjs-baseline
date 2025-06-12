@@ -8,3 +8,12 @@ Ticket 01 – Generate Normalized Customer Tables from JSON Schema
 #### Changes
 - Add customer domain migration
 - Document migration usage
+
+### 0.0.4 – 2025-06-12T01:30:00Z (feat/test-data-T02)
+
+#### Task
+Ticket 02 – Create set of test data
+
+#### Changes
+- Add test data seed script
+- Document how to load sample data
