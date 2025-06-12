@@ -1,0 +1,79 @@
+# App: Full-Stack Application
+# Package: api
+# File: tests/http/customers.http
+# Version: 0.1.2
+# Author: Bobwares CodeBot
+# Date: 2025-06-12
+# Description: Customer CRUD workflow (self-contained)
+
+@baseUrl   = http://localhost:3001
+@firstName = Alice
+@lastName  = Smith
+@email     = alice.smith.{{$timestamp}}@example.com
+
+
+POST {{baseUrl}}/customers
+Content-Type: application/json
+
+{
+  "firstName": "{{firstName}}",
+  "lastName": "{{lastName}}",
+  "primaryEmail": "{{email}}"
+}
+
+> {%
+    client.test("Created", () => {
+        client.assert(response.status === 201, "Should be 201 Created");
+        const body = JSON.parse(response.body);
+        client.global.set("customerId", body.id);
+    });
+%}
+
+### 2. Retrieve that customer ------------------------------------------------
+
+GET {{baseUrl}}/customers/{{customerId}}
+Accept: application/json
+
+> {%
+    client.test("Fetched by id", () => {
+        client.assert(response.status === 200, "Should be 200 OK");
+        const body = JSON.parse(response.body);
+        client.assert(body.firstName === "{{firstName}}", "Names match");
+    });
+%}
+
+### 3. Update the record -----------------------------------------------------
+PUT {{baseUrl}}/customers/{{customerId}}
+Content-Type: application/json
+
+{
+  "firstName": "{{firstName}}-Updated",
+  "lastName": "{{lastName}}"
+}
+
+> {%
+    client.test("Updated", () => {
+        client.assert(response.status === 200, "Should be 200 OK");
+    });
+%}
+
+### 4. List all customers ----------------------------------------------------
+GET {{baseUrl}}/customers?limit=10
+Accept: application/json
+
+> {%
+    client.test("List returns array", () => {
+        client.assert(response.status === 200);
+        const body = JSON.parse(response.body);
+        client.assert(Array.isArray(body.items), "items[] should be array");
+    });
+%}
+
+### 5. Delete the customer ---------------------------------------------------
+DELETE {{baseUrl}}/customers/{{customerId}}
+
+> {%
+    client.test("Deleted", () => {
+        client.assert(response.status === 204, "Should be 204 No Content");
+    });
+%}

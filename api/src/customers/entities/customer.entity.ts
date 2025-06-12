@@ -48,6 +48,6 @@ export class Customer {
   })
   phoneNumbers?: CustomerPhoneNumber[];
 
-  @Column({ name: 'is_deleted', default: false })
-  isDeleted?: boolean;
+  // @Column({ name: 'is_deleted', default: false })
+  // isDeleted?: boolean;
 }

@@ -13,13 +13,13 @@ import {
   UnprocessableEntityException,
 } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import basicAuth from "express-basic-auth";
+import * as basicAuth from 'express-basic-auth';
 import { HttpExceptionFilter } from "./filters/http-exception.filter";
 import { AppModule } from "./app.module";
 import { LoggingInterceptor } from "./logging/logging.interceptor";
 import { RequestIdMiddleware } from "./logging/request-id.middleware";
 import { Logger } from "nestjs-pino";
-import pkg from "../package.json";
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
@@ -45,7 +45,7 @@ async function bootstrap() {
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle("Full-Stack API")
-    .setVersion(pkg.version)
+    .setVersion("1")
     .addServer("http://localhost:3000", "dev")
     .addServer("/", "prod")
     .build();

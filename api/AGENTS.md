@@ -91,7 +91,7 @@ This is a NestJS + TypeScript REST API that connects to an ORM layer. Its respon
 
 1. **Multi-Environment Support**
 
-   * Environments: `local`, `dev`, `stage`, `prod`
+   * Environments: `codex`, `local`, `dev`, `stage`, `prod`
    * Active environment specified via `APP_ENV` or `NODE_ENV`.
 
 2. **Externalized & Validated Configuration**
