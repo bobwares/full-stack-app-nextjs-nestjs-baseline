@@ -1,0 +1,28 @@
+{
+  "item_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "name": "Widget A",
+  "description": "High-quality widget for general-purpose applications.",
+  "quantity": 100,
+  "price": 9.99,
+  "currency": "USD",
+  "location": "WH-1-A3",
+  "categories": [
+    "widgets",
+    "hardware"
+  ],
+  "tags": [
+    "sale",
+    "popular"
+  ],
+  "supplier": {
+    "supplier_id": "1f4e1d7a-82b1-4a23-9a2a-4b1c3df8e5b2",
+    "name": "Acme Corp."
+  },
+  "attributes": {
+    "color": "red",
+    "weight": 1.25,
+    "fragile": false
+  },
+  "date_added": "2025-06-01T10:00:00Z",
+  "last_updated": "2025-06-10T15:30:00Z"
+}
