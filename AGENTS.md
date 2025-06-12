@@ -247,23 +247,7 @@ List the trade-offs and implications (positive and negative).
 
 ### Automated Task-Run Logs
 
-After every Codex task completes, **copy the sandbox log to the repository and commit it** so reviewers have a permanent audit trail.
-
-
-post_turn:
-- name: Archive Codex log for this turn
-  shell: bash
-  run: |
-  # 1. Choose (or create) a folder in your repo
-  mkdir -p "$REPO_ROOT/codex-logs"
-
-  # 2. Copy the log directory and add an ISO-timestamp suffix
-  TS=$(date -u +"%Y-%m-%dT%H-%M-%SZ")           # 2025-06-11T14-05-09Z
-  cp -r ~/.codex/log "$REPO_ROOT/codex-logs/$TS"
-
-  # 3. Stage the new log for the next commit
-  git add "codex-logs/$TS"
-# ──────────────────────────────────────────────────────────────────────────────
+After every Codex turn save the reasoning thoughts to the file project_root/reasoning.md 
 
 
 *End of AGENTS.md*
