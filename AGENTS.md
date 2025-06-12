@@ -185,45 +185,6 @@ Copy this template into every PR description and fill in each placeholder.
 
 After every Codex task completes, **copy the sandbox log to the repository and commit it** so reviewers have a permanent audit trail.
 
-1. **Locate the log file**
-   Codex writes a timestamped log to the environment variable `CODEX_LOG_PATH` (fallback paths:
-   `~/Library/Logs/oai-codex/` · `$XDG_STATE_HOME/oai-codex/` · `%TEMP%\oai-codex\`).
-
-2. **Copy into the repo**
-
-   ```bash
-   #!/usr/bin/env bash
-   set -euo pipefail
-
-      # 1. Resolve latest log
-   LOG_FILE="${CODEX_LOG_PATH:/home/node/.codex/log"
-   # 2. Define repo location
-   DEST_DIR="logs/codex"
-   mkdir -p "$DEST_DIR"
-   # 3. Name file: codex-<task-id>-YYYYMMDDTHHMMSSZ.log
-   TS=$(date -u +"%Y%m%dT%H%M%SZ")
-   FILE_BASENAME="codex-${TASK_ID:-unknown}-${TS}.log"
-   cp "$LOG_FILE" "${DEST_DIR}/${FILE_BASENAME}"
-
-   git add "${DEST_DIR}/${FILE_BASENAME}"
-   git commit -m "chore(logs): add Codex sandbox log for task ${TASK_ID:-unknown}"
-   git push origin "$(git rev-parse --abbrev-ref HEAD)"
-   ```
-
-3. **Commit and push** (same branch that implemented the task)
-
-   ```bash
-   git add "${DEST_DIR}/${FILE_BASENAME}"
-   git commit -m "chore(logs): add Codex sandbox log for task ${TASK_ID:-unknown}"
-   git push origin "$(git rev-parse --abbrev-ref HEAD)"
-   ```
-
-4. **House-keeping**
-
-   * Keep only the most recent **20** log files per branch (`find logs/codex -type f | sort | head -n -20 | xargs rm -f`).
-   * Logs contain no secrets—Codex automatically redacts tokens and passwords.
-
-> **Coding Agent MUST** execute the script above (or equivalent steps) at the end of every task run. This guarantees each PR includes its full sandbox log under `logs/codex/`, preserving reproducibility and review visibility.
 
 ## ADR (Architecture Decision Record) Folder
 
@@ -244,7 +205,7 @@ project_root/adr/
 | Selecting one library or pattern over plausible alternatives | Choosing Prisma instead of TypeORM                             | **Yes**   |
 | Introducing a new directory or module layout                 | Splitting `customer` domain into bounded contexts              | **Yes**   |
 | Changing a cross-cutting concern                             | Switching error-handling strategy to functional `Result` types | **Yes**   |
-| Cosmetic or trivial change                                   | Renaming a variable                                            | No        |
+| Cosmetic or trivial change                                   | Renaming a variable                                            | **Yes**   |
 
 ### Naming Convention
 
