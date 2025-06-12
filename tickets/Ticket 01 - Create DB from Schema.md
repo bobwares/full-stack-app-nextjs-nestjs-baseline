@@ -14,6 +14,7 @@ project_root/db/tasks/TASK - DB - JSON to SQL Transformation.md
 Domain = customer_profile
 JSON Schema = project_root/schemas/customer_domain.json
 
+**Accept Criteria**
 
 * `project_root/db/migrations/01_customer_domain.sql`
 * Update to `project_root/db/README.md` under the “Migrations” section

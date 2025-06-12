@@ -1,13 +1,13 @@
+# TASK - DB - Seed Script
+
 **Context**:
 Seed initial customer data for development.
-Tech: PostgreSQL 16, Plain SQL, Docker
-Env: { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, DATABASE_URL }
-Project: <project-name>
+Tech: PostgreSQL 16 Dialect
 Directory: /db
 
 **Task**:
-Create a seed script in `db/scripts/seed/01_seed_<resource>.sql` that:
-- Inserts 10 sample customers into the `customer` table (columns: `customer_id`, `name`, `email`)
+Create a seed script in `project_root/db/test/01_<domain>_test_dataed.sql` that:
+- Inserts 10 sample records for the normalized table.
 - Ensures idempotency using `ON CONFLICT DO NOTHING`
 - Includes a metadata header and smoke test query
 
@@ -19,7 +19,10 @@ Create a seed script in `db/scripts/seed/01_seed_<resource>.sql` that:
 
 **Inputs**
 
+Domain = customer_profile
+SQL DLL =  `project_root/db/migrations/01_customer_domain.sql`
 
 
 **Output**:
-A complete SQL file with metadata header, `INSERT` statements, and smoke test.
+- File: `project_root/db/test/01_customer_domain_test_data.sql`
+- A complete SQL file with metadata header, `INSERT` statements, and smoke test.
