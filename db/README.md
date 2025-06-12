@@ -18,10 +18,20 @@ From project root:
 ```
 cd db  
 cp .env.example .env  
-docker compose up -d  
+docker compose up -d
 ```
 
 *By default, the entrypoint applies all migrations in `migrations/` then runs schema and seed scripts.*
+
+### Using the Makefile
+
+Inside the `db` directory you can run short Make targets instead of docker commands:
+
+```bash
+make migrate    # apply migrations
+make test-data  # insert sample data
+make db-test    # run migrations then seed data
+```
 
 ### Manual Steps
 
