@@ -66,6 +66,7 @@ Run unit and integration tests:
 ```bash
 npm run test
 npm run test:coverage
+npm run test:e2e
 ```
 
 Test files follow the naming conventions `<module>.spec.ts` or `<module>.test.ts` and mirror the `src/` structure.
@@ -113,6 +114,45 @@ project_root/api/
 * Use modern language and framework features (async/await, decorators, dependency injection).
 * Keep `README.md` up to date with any changes.
 
+### Error Handling
+
+All API errors use a uniform JSON structure:
+
+```json
+{
+  "statusCode": 400,
+  "message": "Invalid input",
+  "error": "BadRequestException",
+  "path": "/customers",
+  "timestamp": "2025-06-12T00:00:00.000Z"
+}
+```
+
+Unknown routes return a 404 response in the same format. Invalid fields are reported with HTTP 422 while forbidden properties result in HTTP 400.
+
+### Logging
+
+The API uses **nestjs-pino** for structured JSON logs. Each request receives an
+`X-Request-Id` header allowing correlation across services. Log lines include the
+HTTP method, URL, status code, response time, and request ID. Configure log
+behaviour using:
+
+```
+LOG_LEVEL=info       # minimum level
+PRETTY_LOGS=true     # pretty formatting in development
+```
+
+### API Docs
+
+Interactive Swagger UI is served at `/docs` in development. The raw OpenAPI
+specification is available at `/openapi.json` and can be exported with:
+
+```bash
+npm run openapi:export
+```
+
+The JSON file is written to `api/docs/openapi.json` for CI artifacts.
+
 ## Contribution
 
 1. Fork the repository and create a feature branch.
@@ -138,7 +178,7 @@ The Customers API provides CRUD operations for customer records.
 | DELETE | `/customers/:id` | Remove a customer |
 
 ### Database Setup
-
 1. `cd project_root/db && docker-compose up -d` to start PostgreSQL.
-2. `npm run typeorm:migration:run` to apply migrations.
+2. `npm run typeorm migration:run` to apply migrations.
 3. `npm run start:dev` to run the server.
+4. `npm run test:e2e` runs end-to-end tests using an in-memory SQLite database when `APP_ENV=codex`.
