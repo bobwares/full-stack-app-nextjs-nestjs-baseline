@@ -109,3 +109,11 @@ Task 09 – End-to-End Tests with Supertest
 #### Changes
 - Expanded e2e suite to cover create, update, delete and error paths
 - Documented how `npm run test:e2e` uses SQLite when `APP_ENV=codex`
+
+### 0.0.14 – 2025-06-12T15:33:47Z (fix/swagger-ts-compile)
+
+#### Task
+Fix compile error due to unused req parameter
+
+#### Changes
+- Removed unused `req` parameter in Swagger OpenAPI endpoint
