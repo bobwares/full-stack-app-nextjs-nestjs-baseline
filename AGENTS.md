@@ -181,10 +181,6 @@ Copy this template into every PR description and fill in each placeholder.
 
 ---
 
-### Automated Task-Run Logs
-
-After every Codex task completes, **copy the sandbox log to the repository and commit it** so reviewers have a permanent audit trail.
-
 
 ## ADR (Architecture Decision Record) Folder
 
@@ -248,6 +244,26 @@ List the trade-offs and implications (positive and negative).
 * Reviewers should treat ADRs as first-class documentation and request clarifications when the **Context** or **Consequences** sections are vague.
 * Once accepted, ADRs are **never edited**, only superseded, to preserve historical context.
 
+
+### Automated Task-Run Logs
+
+After every Codex task completes, **copy the sandbox log to the repository and commit it** so reviewers have a permanent audit trail.
+
+
+post_turn:
+- name: Archive Codex log for this turn
+  shell: bash
+  run: |
+  # 1. Choose (or create) a folder in your repo
+  mkdir -p "$REPO_ROOT/codex-logs"
+
+  # 2. Copy the log directory and add an ISO-timestamp suffix
+  TS=$(date -u +"%Y-%m-%dT%H-%M-%SZ")           # 2025-06-11T14-05-09Z
+  cp -r ~/.codex/log "$REPO_ROOT/codex-logs/$TS"
+
+  # 3. Stage the new log for the next commit
+  git add "codex-logs/$TS"
+# ──────────────────────────────────────────────────────────────────────────────
 
 
 *End of AGENTS.md*
