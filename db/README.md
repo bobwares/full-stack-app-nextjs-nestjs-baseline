@@ -68,8 +68,32 @@ docker exec -it fullstack_baseline_db \
 
 ```
 docker compose down  
-docker compose build --no-cache db  
-docker compose up -d  
+docker compose build --no-cache db
+docker compose up -d
+```
+
+### Domain Migration
+
+To apply the customer domain migration locally:
+
+```bash
+docker compose exec db \
+  psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
+  -f /docker-entrypoint-initdb.d/migrations/01_customer_domain.sql
+```
+
+After running the migration, seed data with:
+
+```bash
+docker compose exec db \
+  psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
+  -f /docker-entrypoint-initdb.d/test/01_customer_domain_test_data.sql
+```
+
+Verify at least ten customers exist:
+
+```sql
+SELECT COUNT(*) FROM customer_profile.customer;
 ```
 
 ## 5. Schema Objects (snapshot)
