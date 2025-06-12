@@ -88,6 +88,24 @@ SELECT COUNT(*) FROM user_account;
 
 Expected output: number of rows inserted by `01_seed_reference_data.sql`.
 
+## 7. Domain Migrations
+
+To apply the customer domain migration manually, run:
+
+```
+docker compose exec db \
+  psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
+  -f /docker-entrypoint-initdb.d/migrations/01_customer_domain.sql
+```
+
+After applying, verify the table exists:
+
+```
+docker compose exec db \
+  psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
+  -c "SELECT COUNT(*) FROM customer;"
+```
+
 ---
 
 Questions? Contact **@Bobwares** on Slack (#backend-infra).
