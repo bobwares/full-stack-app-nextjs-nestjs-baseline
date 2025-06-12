@@ -196,7 +196,7 @@ After every Codex task completes, **copy the sandbox log to the repository and c
    set -euo pipefail
 
       # 1. Resolve latest log
-   LOG_FILE="${CODEX_LOG_PATH:-$(ls -1t ~/Library/Logs/oai-codex/codex-cli-*.log 2>/dev/null | head -n1)}"
+   LOG_FILE="${CODEX_LOG_PATH:/home/node/.codex/log"
    # 2. Define repo location
    DEST_DIR="logs/codex"
    mkdir -p "$DEST_DIR"
