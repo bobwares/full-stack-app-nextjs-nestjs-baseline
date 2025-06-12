@@ -1,9 +1,9 @@
 // App: Full-Stack Application
 // Package: api
 // File: src/main.ts
-// Version: 0.0.11
+// Version: 0.0.14
 // Author: Bobwares CodeBot
-// Date: 2025-06-12T07:40:00Z
+// Date: 2025-06-12T15:33:47Z
 // Description: Entry point for the NestJS backend application with Swagger documentation.
 
 import { NestFactory } from "@nestjs/core";
@@ -63,7 +63,7 @@ async function bootstrap() {
     );
   }
   SwaggerModule.setup("docs", app, document);
-  app.getHttpAdapter().get("/openapi.json", (req, res) => res.json(document));
+  app.getHttpAdapter().get("/openapi.json", (_req, res) => res.json(document));
   await app.listen(3001);
 }
 
