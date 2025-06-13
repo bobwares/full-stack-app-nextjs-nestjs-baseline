@@ -221,11 +221,15 @@ Example: `adr/20250611_001_use-prisma-for-orm.md`.
 # {{ADR Title}}
 
 **Status**: Proposed | Accepted | Deprecated  
+
 **Date**: {{YYYY-MM-DD}}  
+
 **Context**  
 Briefly explain the problem or decision context.  
+
 **Decision**  
 State the choice that was made.  
+
 **Consequences**  
 List the trade-offs and implications (positive and negative).  
 ```
