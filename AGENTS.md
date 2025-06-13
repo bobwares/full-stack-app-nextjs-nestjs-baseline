@@ -1,18 +1,16 @@
-# Project AI Coding Agent Context
+# Project Level AI Coding Agent Context
 
-This document provides guidelines and prompt templates for AI coding agents (e.g., Codex, Copilot, LangChain) to generate high-quality code for the **full-stack-app-nextjs-nestjs-baseline** project. These instructions ensure consistency, adherence to project conventions, and efficient code generation for the Next.js front end, NestJS back end, database schemas, and related components.
+This document provides guidelines for AI coding agents (e.g., Codex, Copilot, LangChain) to generate high-quality code project. 
 
----
-
-## Project Overview
+These instructions ensure consistency, adherence to project conventions, and efficient code generation. 
 
 Generate maintainable, type-safe, and modular code that aligns with the existing structure and conventions.
 
-| Item                  | Value                                   |
-| --------------------- | --------------------------------------- |
-| **GitHub repository** | `full-stack-app-nextjs-nestjs-baseline` |
-| **Application name**  | Full-Stack Application                  |
-| **Author**            | Bobwares CodeBot                        |
+| Item                  | Value                                                             |
+| --------------------- |-------------------------------------------------------------------|
+| **GitHub repository** | https://github.com/bobwares/full-stack-app-nextjs-nestjs-baseline |
+| **Application name**  | Baseline Full-Stack Application                                   |
+| **Author**            | Bobwares CodeBot                                                  |
 
 **Directory summary**
 
@@ -57,29 +55,6 @@ Generate maintainable, type-safe, and modular code that aligns with the existing
 
 ---
 
-## File-Level Metadata Header
-
-Every source file **must** begin with:
-
-```markdown
-# App: {{Application Name}}
-# Package: {{package}}
-# File: {{file name}}
-# Version: {{version}}
-# Author: {{author}}
-# Date: {{current date/ time}}
-# Description: {{level 5 description of the file’s purpose. include prompting cues for AI.}}
-#
-```
-
----
-
-## function/class-Level Comments
-
-Add a comments to source code files.  Follow standards for comment by language.
-
----
-
 ## Git Workflow Conventions
 
 ### 1. Branch Naming
@@ -109,6 +84,7 @@ Add a comments to source code files.  Follow standards for comment by language.
 ### 2. Commit Messages (Conventional Commits)
 
 ```
+AI Coding Agent Change:
 <type>(<optional-scope>): <short imperative summary>
 <BLANK LINE>
 Optional multi-line body (wrap at 72 chars).
@@ -119,7 +95,7 @@ Refs: <ticket-id(s)>
 Example:
 
 ```
-feat(profile-ui): add in-place address editing
+feature(profile-ui): add in-place address editing
 
 Allows users to update their address directly on the Profile Overview
 card without navigating away. Uses optimistic UI and server-side
@@ -127,7 +103,6 @@ validation.
 
 Refs: T1234
 ```
-
 ---
 
 ### 3. Pull-Request Summary Template
@@ -137,9 +112,6 @@ Copy this template into every PR description and fill in each placeholder.
 ```markdown
 # Summary
 <!-- One-sentence description of the change. -->
-
-# Codex Task
-[{{task-name}}](https://chatgpt.com/codex/tasks/{{task-id}} "Open task in Codex")
 
 # Details
 * **What was added/changed?**
@@ -151,35 +123,17 @@ Copy this template into every PR description and fill in each placeholder.
 - T1300 Validation Rules
 
 # Checklist
-- [ ] Unit tests pass (`npm test` / `pytest`)
+- [ ] Unit tests pass 
 - [ ] Integration tests pass
-- [ ] Linter passes (`eslint` / `ruff`)
+- [ ] Linter passes
 - [ ] Documentation updated
-
-# Screenshots / Demo (if UI)
-<!-- Short description or links -->
 
 # Breaking Changes
 <!-- List backward-incompatible changes, or “None” -->
+
+# Codex Task Link
+
 ```
-
-**PR Rules**
-
-1. Title: `type: concise summary (ticket-id)`  →  `feat: in-place address editing (T1234)`.
-2. Keep PRs focused: one logical change, ideally ≤ 400 LOC.
-3. Link to relevant design docs or ADRs.
-4. Assign at least one knowledgeable reviewer.
-5. **Squash merge** into `develop`, using the PR title as the squash commit message.
-
----
-
-## Tickets and Agile Stories
-
-* A **ticket** in your tracker (Jira, GitHub Issues, etc.) maps directly to an **agile story**, task, bug, or epic.
-* Reference its ID everywhere: branch names, commits, PR template “Related Tickets”.
-* Automation should transition ticket status when the PR merges or deploys.
-
----
 
 
 ## ADR (Architecture Decision Record) Folder
@@ -237,7 +191,6 @@ List the trade-offs and implications (positive and negative).
 ### Agent Workflow
 
 1. Before implementing a change that meets the criteria above, the agent must:
-
    * Evaluate alternatives and decide.
    * Generate a new ADR file using the template.
 2. Commit the ADR **in the same pull request** as the code change so reviewers can assess both simultaneously.
