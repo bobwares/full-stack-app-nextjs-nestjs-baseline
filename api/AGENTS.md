@@ -36,6 +36,21 @@ This is a NestJS + TypeScript REST API that connects to an ORM layer. Its respon
 * Jest
 * .http files
 
+## Directory Structure
+
+```
+project_root/api/
+├── src/
+│   ├── modules/           Feature modules (controllers, services, entities)
+│   ├── common/            Shared utilities, filters, pipes, interceptors
+│   ├── config/            Configuration loader and validation schemas
+│   ├── main.ts            Application entry point
+│   └── ...                Other application code
+├── rest-tests/            .http files for testing REST endpoints.
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
 ## 4. Coding Style & Conventions
 
