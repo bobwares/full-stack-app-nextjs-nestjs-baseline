@@ -2,11 +2,17 @@
 
 ## Instructions
 
-Execute the listed tasks.
+execute the following task in the order presented.
 
 **Task**
 
-project_root/db/tasks/TASK - DB - JSON to SQL Transformation.md
+db/tasks/TASK 01 - DB - JSON Schema to SQL Transformation.md
+
+db/tasks/TASK 02 - DB - SQL Schema to JSON Schema.md
+
+db/tasks/TASK 03 - DB - Create Test Data for Schema.md
+
+api/tasks/TASK 02 – API – JSON Schema → NestJS Entity Generation.md
 
 
 **Inputs**
