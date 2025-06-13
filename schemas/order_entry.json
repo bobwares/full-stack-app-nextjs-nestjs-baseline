@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/order-entry.json",
+  "title": "OrderEntry",
+  "description": "An order placed by a customer, including line items, addresses, payment, and totals.",
+  "type": "object",
+  "required": [
+    "order_id",
+    "customer_id",
+    "date_placed",
+    "status",
+    "items",
+    "shipping_address",
+    "billing_address",
+    "sub_total",
+    "tax",
+    "shipping_cost",
+    "total"
+  ],
+  "properties": {
+    "order_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Globally unique identifier for the order."
+    },
+    "customer_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identifier of the customer who placed the order."
+    },
+    "date_placed": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the order was placed."
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the most recent update to the order."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled",
+        "returned"
+      ],
+      "description": "Current status of the order."
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": ["unpaid", "paid", "refunded"],
+      "description": "Current payment status."
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": ["credit_card", "paypal", "bank_transfer", "cash"],
+      "description": "Method used to pay for the order."
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["item_id", "name", "quantity", "unit_price"],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Identifier of the inventory item."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "Name of the item."
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Number of units ordered."
+          },
+          "unit_price": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Price per unit."
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$",
+            "description": "ISO 4217 currency code."
+          },
+          "total_price": {
+            "type": "number",
+            "minimum": 0,
+            "description": "quantity × unit_price."
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Line items included in the order."
+    },
+    "shipping_address": {
+      "type": "object",
+      "required": [
+        "street1",
+        "city",
+        "state",
+        "postal_code",
+        "country"
+      ],
+      "properties": {
+        "street1": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "Primary street address."
+        },
+        "street2": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "Secondary street address (optional)."
+        },
+        "city": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "City name."
+        },
+        "state": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "State or province."
+        },
+        "postal_code": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "Postal or ZIP code."
+        },
+        "country": {
+          "type": "string",
+          "pattern": "^[A-Z]{2,3}$",
+          "description": "ISO 3166 country code."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Shipping address for the order."
+    },
+    "billing_address": {
+      "type": "object",
+      "required": [
+        "street1",
+        "city",
+        "state",
+        "postal_code",
+        "country"
+      ],
+      "properties": {
+        "street1": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "Primary street address."
+        },
+        "street2": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "Secondary street address (optional)."
+        },
+        "city": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "City name."
+        },
+        "state": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "State or province."
+        },
+        "postal_code": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "Postal or ZIP code."
+        },
+        "country": {
+          "type": "string",
+          "pattern": "^[A-Z]{2,3}$",
+          "description": "ISO 3166 country code."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Billing address for the order."
+    },
+    "sub_total": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Sum of all item total_price values."
+    },
+    "tax": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Tax amount for the order."
+    },
+    "shipping_cost": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Cost to ship the order."
+    },
+    "total": {
+      "type": "number",
+      "minimum": 0,
+      "description": "sub_total + tax + shipping_cost."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional notes or instructions for the order."
+    }
+  },
+  "additionalProperties": false
+}

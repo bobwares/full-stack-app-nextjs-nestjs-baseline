@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/inventory-item.json",
+  "title": "InventoryItem",
+  "description": "A single item in inventory, with identifiers, stock levels, pricing, and metadata.",
+  "type": "object",
+  "required": ["item_id", "name", "quantity", "price", "date_added"],
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Globally unique identifier for the inventory item."
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Human-readable name of the item."
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the item."
+    },
+    "quantity": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Current stock level; zero or positive."
+    },
+    "price": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Unit price in the relevant currency."
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 currency code (e.g., USD, EUR)."
+    },
+    "location": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Warehouse or shelf location identifier."
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of category names or identifiers."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ad-hoc labels for searching or filtering."
+    },
+    "supplier": {
+      "type": "object",
+      "required": ["supplier_id", "name"],
+      "properties": {
+        "supplier_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique ID of the supplier."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "Name of the supplier."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Information about the item's supplier."
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["string", "number", "boolean"]
+      },
+      "description": "Free-form key/value attributes (e.g., color, size, weight)."
+    },
+    "date_added": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the item was first added to inventory."
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the most recent update to this item."
+    }
+  },
+  "additionalProperties": false
+}
